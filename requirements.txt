@@ -1,0 +1,33 @@
+# Core API & Serving
+fastapi>=0.115.0
+uvicorn>=0.30.0
+pydantic>=2.0.0
+python-dotenv>=1.0.0
+
+# Frontend
+streamlit>=1.35.0
+requests>=2.31.0
+
+# LLM Generation — un-comment and install only the provider you plan to use.
+# NOTE: The app can even run without any LLM key — it degrades gracefully to raw retrieval.
+langchain-core>=1.2.0
+langchain-openai>=1.1.0              # Default. Add OPENAI_API_KEY to .env to activate.
+# langchain-anthropic>=0.3.0         # Optional. Add ANTHROPIC_API_KEY to .env to activate.
+# langchain-google-genai>=2.0.0      # Optional. Add GOOGLE_API_KEY to .env to activate.
+
+# Embeddings & Vector Store
+langchain-huggingface>=0.1.0
+langchain-chroma>=0.1.0
+sentence-transformers>=3.0.0
+chromadb>=0.5.0
+
+# Text Splitting
+langchain-text-splitters>=0.3.0
+
+# PDF Ingestion (only needed to re-run ingestion from scratch)
+llama-cloud>=1.2.0
+httpx>=0.27.0
+beautifulsoup4>=4.12.0
+
+# Utilities
+transformers>=4.40.0

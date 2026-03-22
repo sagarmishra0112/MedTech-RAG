@@ -1,0 +1,74 @@
+Total Chunks Generated: 55
+=========================================
+
+--- FIRST TEXT CHUNK ---
+Allengers-100
+(X-RAY GENERATOR)
+
+BODY PART  SIZE  VIEW
+LOWER-EXT BABY   AP
+
+040 002    50 L K4 VER
+KV  mAs    mA
+
+              KV
+
+BODY PARS    mAS
+
+POWER
+
+INSTALLATION/SERVICE MANUAL
+
+Allengers
+MEDICAL SYSTEMS LTD.              Our EU Authorised Representative:-
+S.C.0. 212-214, SEC. 34-A,        JMC Medical Sprl,
+CHANDIGARH (INDIA)                58, Avenue du Parc de Woluwe
+TEL.: +91-172-3012287, 3012285    B-1160 Bruxelles
+FAX: +91-172-2621912              Belgium
+E-mail: exports@allengers.net     Tel: +32.2.672.56.44
+Website: www.allengers.com        Fax: +32.2.662.29.92
+                                  E-mail: jmc@beon.be
+
+We Aim For Your Delight
+
+                                      PREFACE
+
+        This Installation and Service Manual of Allengers 100 X-Ray Machine
+    covers all aspects of Installation and Servicing of the Machine.
+
+        The Manual covers the Installation Procedure & checkpoints, Circuit
+       Diagram, its Explanation, Calibration Procedure, Trouble Shooting and
+    major parts list.
+
+         Although all efforts have been made to keep this Manual simple to
+     understand, in case of any clarification, Allengers International Customer
+    Care Cell can be contacted for more detailed information on any aspect.
+
+    It is assumed that anyone referring to this manual and attempting to service
+        the X-Ray Machine has relevant Technical background and Training to
+    service this Equipment.
+
+    This Manual is company's confidential document and is meant to be
+circulated only to company's Service Engineers and authorized Service
+    Dealers.
+
+    Photocopying and free circulation of this document is prohibited.
+
+                                                      Contents
+
+                                      CONTENTS
+
+1. System Overview.                                     1
+
+--- FIRST TABLE CHUNK ---
+### Data Table - Source: Page 8
+| ALLENGERS-100 (APR LCD) | 100mA, Full Wave Rectified X-Ray Generator with Stationary Anode X-Ray Tube and LCD Display<br/>**Anatomical Programmed Radiography (APR):** For quick and fine selection of radiographic parameters for optimum image quality. |
+|---|---|
+| OUTPUT | 8.0 KW |
+| mA STATIONS | 100 mA, 50 mA and 25 mA |
+| KVP RANGE | 40 to 100KVP in Steps of 1 KVP/Step. |
+| TIMER | Controller based electronic timer having range from 0.01 to 8.0 sec in 21 steps. |
+| CONTROL | * **Anatomical Programmed Radiography** helps the operator in such a way that by just selecting the Patient Size and Body Part to be X-Rayed the KVP and mAs are automatically selected * Attractive and Ergonomically designed feather Touch Panel **control panel having LCD display** which displays the parameters like mA, mAs, KVP, Screen type, Bucky selection, selected body part description. * Laminated Membrane switches are provided for mA Selection, KVP Selection, mAs selection, Ready, X-Ray S/W, Bucky Selection S/W and M/C ON-OFF S/Ws. * Provided with a voltage compensator switch for adjusting the I/P voltage of machine to 230V. Adjustment can be made in the range 190V to 260V & for this a Digital voltmeter is provided to display the input voltage. * A Booster X-mer is provided to stabilize and maintain the filament voltage. * A hand S/W with five meter length retractable cord is provided for operating the equipment from distance position. |
+| OVERLOAD PROTECTION & SAFETY FEATURES | * Automatic trip off overload Circuit Breaker * Ready & X-Ray indicators * Fuses for all circuits are provided in the machine * Electronic overload system does not allow Machine to select parameters which are out of range according to X-ray tube rating chart |
+| TUBE HEAD | Self-contained Tube Head containing Stationary Anode X-Ray Tube, Compact Heavy Duty Full Wave Rectified H.T. Transformer and High Voltage Silicon Rectifiers etc. all oil immersed and hermetically sealed. Tube head can be tilted 360 Degree with full flexibility for use in operation theatres and in ward for bed-side radiography. A multi-leaf collimator is provided |
+| POWER REQUIREMENT | 230 Volts, Single Phase, AC supply. Max. Allowable Line Regulation ± 10%. (with line resistance less than 0.4 ohm.) |

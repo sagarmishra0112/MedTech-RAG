@@ -1,0 +1,49 @@
+# ============================================================
+#  FinanceRAG — .gitignore
+# ============================================================
+
+# --- SECRETS (NEVER commit these!) -------------------------
+.env
+*.key
+*.pem
+
+# --- Python Virtual Environment ----------------------------
+ragvenv/
+venv/
+env/
+.venv/
+
+# --- Python Cache & Bytecode --------------------------------
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+
+# --- ChromaDB Local Vector Store (large binary files) -------
+data/chroma_db/
+
+# --- Large Data & PDF Files ---------------------------------
+data/screenshots/
+*.pdf
+
+# --- Jupyter Notebook Checkpoints ---------------------------
+notebooks/.ipynb_checkpoints/
+.ipynb_checkpoints/
+
+# --- IDE & OS Files -----------------------------------------
+.vscode/
+.idea/
+*.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- Logs ---------------------------------------------------
+*.log
+uvicorn.log
+
+# --- Personal Study & Scratch Files (not for public repo) ---
+learning_notes.txt
+notebooks/
+Extra/
+Content/

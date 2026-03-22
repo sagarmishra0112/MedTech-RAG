@@ -1,0 +1,1819 @@
+Total Chunks Generated: 52
+Text Chunks: 44 | Table Chunks: 8
+=========================================
+
+--- ALL TEXT CHUNKS ---
+
+--- [TEXT CHUNK 1] ---
+1. SYSTEM OVERVIEW
+
+1.1 INTRODUCTION
+
+ The Radiography Parameters defined in this machine are based on Human Anatomy. This is
+ reason why this machine is known as APR (Anatomical Programmed Radiography Machine).
+
+There are different keys to define the Body Part to be exposed and depending on the defined Part
+ by operator, machine it-self set the parameters depending on the built of patient and Screen
+ Speed combination available for Exposure.
+
+ Operator can choose manual mode and can select their own parameters for exposures
+
+ Allengers 100 is a Diagnostic X-Ray generator, which caters to the general requirements of
+ Radiography. This generator is also available in other options like Fluoroscopy and Spot
+Filming. This equipment can be used with following combinations of stands and tables
+
+STANDS:
+
+Counter balanced mobile stand (CBM)- Incase of Machines with Radiography only
+
+Allengers 100 X-Ray generator is ideally suited for Chest/ Extremities/ Skull/ Abdomen anc
+other routine examinations.
+
+This unit incorporates State - of - the- Art technology and is designed keeping in mind the
+diverse requirements of the Radiologists. It is a Full Wave Rectified Unit (Two Pulse) and
+consists of Control Panel & Self contained Tube Head Unit with manual collimator.
+
+This machine is Type Approved for Electrical, Mechanical and Radiation Safety Standards
+(vide IS: 7620) from the Atomic Energy Regulatory Board (AERB), Govt. of India, thus making
+it entirely safe from the Radiation Hazards.
+
+--- [TEXT CHUNK 2] ---
+This machine is Type Approved for Electrical, Mechanical and Radiation Safety Standards
+(vide IS: 7620) from the Atomic Energy Regulatory Board (AERB), Govt. of India, thus making
+it entirely safe from the Radiation Hazards.
+
+    
+                                                          System Overview
+                                                1.       Column Cover
+The System consists of the following:           3        Column
+                                                         Pin for Vertical Carriage
+                                                5.       Tube Head
+                                                          Tube Head Hanger
+                                                6.      Tube Head Rotational Lock
+                                                7.      Vertical Carriage Locking Knob
+                                                8.      LBD (Collimator)
+                                                9.        Compensator Switch & MCB
+2                                               10.      Control
+6                                               11.     E Ring for Foot Lock Rod
+                                                12.     Base
+                                                13.      Foot Lock for Machine movement
+     5  4                                       14.      Control Handle
+                                               15.      Panel
+                                                16.      Hand Switch
+                                                17.      Fuses, Main Supply, Ext. Cord,
+                                                18.       Bucky & Tube Head Connections
+                                         20     19.       Digital Voltmeter
+                                                          Tube Head Rotational Knob
+                                         19     20.       Vertical Carriage
+
+                                         18
+
+--- [TEXT CHUNK 3] ---
+18
+
+                                                          16
+
+                                                                15
+     8       9
+
+                                                                  14
+
+10
+
+13
+
+12
+
+    
+                                                                System Overview
+
+1.2     TECHNICAL SPECIFICATIONS
+
+--- [TEXT CHUNK 4] ---
+ALLENGERS-100 (APR          100mA, Full Wave Rectified X-Ray Generator with Stationary
+LCD)               Anode X-Ray Tube and LCD Display
+                           Anatomical Programmed Radiography (APR): For quick and fine
+                    selection of radiographic parameters for optimum image quality.
+OUTPUT             8.0 KW
+mA STATIONS         100 mA, 50 mA and 25 mA
+KVP RANGE           40 to 100KVP in Steps of 1 KVP/Step.
+TIMER              Controller based electronic timer having range from 0.01 to 8.0 sec
+                   in 21 steps.
+                               Anatomical Programmed Radiography helps the operator in
+                      such a way that by just selecting the Patient Size and Body Part
+                      to be X-Rayed the KVP and mAs are automatically selected
+                             Attractive and Ergonomically designed feather Touch Panel
+                                   control panel having LCD display which displays the
+                           parameters like mA, mAs, KVP, Screen type, Bucky selection,
+                      selected body part description.
+                            Laminated Membrane switches are provided for mA Selection.
+CONTROL                          KVP Selection, mAs selection, Ready, X-Ray S/W, Bucky
+                      Selection S/W and M/C ON-OFF S/Ws.
+                      Provided with a voltage compensator switch for adjusting the I/P
+                             voltage of machine to 230V. Adjustment can be made in the
+                      range 190V to 260V & for this a Digital voltmeter is provided to
+                     display the input voltage.
+                             A Booster X-mer is provided to stabilize and maintain the
+                     filament voltage.
+                        A hand S/W with five meter length retractable cord is provided
+                      for operating the equipment from distance position.
+
+--- [TEXT CHUNK 5] ---
+A Booster X-mer is provided to stabilize and maintain the
+                     filament voltage.
+                        A hand S/W with five meter length retractable cord is provided
+                      for operating the equipment from distance position.
+                     Automatic trip off overload Circuit Breaker
+OVERLOAD             Ready & X-Ray indicators
+PROTECTION &         Fuses for all circuits are provided in the machine
+SAFETY FEATURES            Electronic overload system does not allow Machine to select
+                      parameters which are out of range according to X-ray tube rating
+                      chart
+                      Self-contained Tube Head containing Stationary Anode X-Ray Tube.
+                           Compact Heavy Duty Full Wave Rectified H.T. Transformer and
+                             High Voltage Silicon Rectifiers etc. all oil immersed and
+TUBE HEAD            hermetically sealed. Tube head can be tilted 360 Degree with full
+                   flexibility for use in operation theatres and in ward for bed-side
+                   radiography.
+                    A multi-leaf collimator is provided
+POWER                          230 Volts, Single Phase, AC supply. Max. Allowable Line
+REQUIREMENT         Regulation ± 10%. (with line resistance less than 0.4 ohm.)
+
+--- [TEXT CHUNK 6] ---
+System Overview
+
+1.3 DESCRIPTION OF CONTROL
+
+Operator Console of Allengers-100 consists of following keys as shown:
+
+BODY PART  SIZE  VIEW    Allengers
+LOWER-EXT BABY   AP
+
+A    040 002 50 L K4 VER          B
+
+KV  mAs                        mA  L
+
+12    VIEW                  10     8    KV    6
+
+13    BODY PART    SIZE     9      7    mAs    5
+
+POWER    EXPOSURE
+
+2    D    3  4
+
+    
+                                                                      System Overview
+
+    1.4 DESCRIPTION OF CONTROL KEYS
+
+    1.MACHINE ON SWITCH O
+
+    This switch is used to turn ON the machine.
+
+    2. MACHINE OFF SWITCH
+
+    This switch is used to turn OFF the machine. Indicator along this switch glows when
+    power is available to the machine but machine is in OFF condition.
+
+    3.READY SWITCH
+
+     This switch is used to Boost the Filament
+
+     4. EXPOSURE SWITCH
+
+    This switch is used to make an Exposure. For exposure, first press the Ready Switch and
+    then Exposure Switch Simultaneously
+
+    5mA SELECTION SWITCH               mA
+
+    This Switch is used to select the mA. By pressing this switch mA station will be changed.
+
+     BUCKY SWITCH
+
+     This switch is used to energize the Horizontal or Vertical Bucky.
+
+     7. mAS INCREASE & DECREASE SWITCHS       mAs
+
+    These switches are used to Increase / Decrease the mAs. mAs can be Increased or
+    Decrease from 1 to 200 mAs
+
+    Note: - kV and mAs Increase Decrease switch does not work in the APR Mode.
+
+    8. KV INCREASE & DECREASE SWITCH  KV
+
+This switch is used to Increase / Decrease KV. KV can be Increased or Decrease from
+   40 to 100 KV in steps of 1 KV each and the display of KV is shown on the display
+    above these switches.
+
+            
+System Overview
+
+ 9.PATIENT SIZE SELECTION SWITCH      SIZE
+
+ This switch is used to select the body size of the patient i.e.
+ LARGE/MEDIUM/SMALL/BABY
+
+ 10.AP/LAT/OBL  VIEW
+
+--- [TEXT CHUNK 7] ---
+System Overview
+
+ 9.PATIENT SIZE SELECTION SWITCH      SIZE
+
+ This switch is used to select the body size of the patient i.e.
+ LARGE/MEDIUM/SMALL/BABY
+
+ 10.AP/LAT/OBL  VIEW
+
+  This switch is used to change the view of patient body part to be exposed
+
+  11. DENSITY SWITCH
+
+  This switch is used to select the screen speed combinations like 200 speed/400 speed/800
+speed.
+
+12. APR  APR
+When we switch ON the machine then by default machine is in the APR Mode. By
+  pressing this switch the machine will switch to Manual Mode from APR Mode.
+
+  13. BODY PART SELECTION SWITCHES        BODY PART
+
+  These switches are used to select the Body Area of which X-Ray is to be taken i.e.
+Lower-EXT, Hand, Pelvis & Spine, Abdomen, DOR-Spine, Chest, Shoulder, CEP-Spine,
+Skull.
+
+ A)THIS SWITCH IS NOT USD IN THIS MACHINE
+
+THIS SWITCH IS NOT USD IN THIS MACHINE  OE
+
+BODY PART                               SIZE  VIEW
+LOWER-EXT BABY                                AP
+DISPLAY    040 002                      50 L K4 OFF
+
+           KV  mAS                      mA        -ti-
+         
+                                                    System Overview
+
+                                                    Ready
+
+ READY/EXPOSURE INDICATOR                           Exposure
+ When we press ready switch from Panel or Hand Switch ready indicator (green) is
+glowing and when Exposure switch is pressed Exposure indicator (yellow) is glowing.
+DIGITAL PANEL VOLTMETER            230
+
+This meter is used to show the machine Input Supply.
+
+F) COMPENSATOR SWITCH (ON BACKSIDE OF CONTROL)
+
+The Compensator switch is provided at the back side of control which is having 12 Steps
+and is used to adjust large variations in incoming voltage from 190V to 260V.
+
+                                                                                Exposure
+ G) HAND SWITCH (MOUNTED ON CONTROL PANEL)                                      Ready
+
+--- [TEXT CHUNK 8] ---
+Exposure
+ G) HAND SWITCH (MOUNTED ON CONTROL PANEL)                                      Ready
+
+ This is two-position switch. When switch is pressed in first step, Ready function is
+activated and when this switch is pressed further, X-Ray functions is activated.
+
+FUSES FOR SAFETY:
+Fuse No.  Function                 Rating           Location
+  F1      Line Fuse          25 Amps.
+ F2       Filament Supply          4 Amps.          On Rear of Control
+  F3      Motherboard Card         2 Amps.          Panel
+  F4      Light Beam Diaphragm     4 Amps.
+          (Collimator) Fuse
+
+ 16 Amp MCB is provided for over current protection.
+
+LBD LIGHT ON SWITCH (ON LBD)
+This is Push to ON type switch. When it is pressed bulb gets ON and remains ON for 1
+minute. After 1 minute bulb gets OFF automatically.
+
+    
+    System Overview
+
+     1.5 POWER SUPPLY REQUIREMENTS
+
+     The electrical power requirements for Allengers 100 X-Ray system are as follows:
+
+    Input Voltage: Single Phase 230 V AC with regulation of ± 10 %
+    Input Frequency: 50/60 Hz.
+    Current Rating: 15 Amps.
+    Line Resistance: 0.4 Ohms as per IS 7620 (Part 1)
+
+    It must be ensured that at the power socket, the right pin of socket is connected to Phase
+    (line) and left to the Neutral. Also, voltages between following points should be checked:
+
+    Phase & Neutral:    230 V AC
+
+    Neutral & Earth:    0 V AC
+
+    Phase & Earth:      230 V AC
+
+    EARTHING:
+
+It is strongly recommended that independent earthing (at zero potential) is available in
+  the power socket in the Room where the machine is to be used. Proper earthing not only
+    enhances the performance & reliability of the equipment but increases safety for the
+    operating staff as well.
+
+    1.6 ENVIRONMENTAL CONDITIONS:
+
+    Storage
+    Temperature 0 to 40°C
+    Humidity  Maximum 90% at 30°C
+
+    Operating Conditions:
+
+--- [TEXT CHUNK 9] ---
+1.6 ENVIRONMENTAL CONDITIONS:
+
+    Storage
+    Temperature 0 to 40°C
+    Humidity  Maximum 90% at 30°C
+
+    Operating Conditions:
+
+    Temperature 10° to 40°C
+    Humidity  Upto 75%
+
+            
+Unpacking Instructions
+
+2. UNPACKING INSTRUCTIONS
+
+   Optimum care is taken while packing the machine so that the machine must reach to the final
+       destination without any scratches and must be free from any transportation damages. The
+machine is first packed in Polythene sheet & then further packing is done either using
+      foam/thermocole sheet. The outer carton could be of cardboard box or wooden ply packing.
+        The wooden boxes are packed with the nails and metallic strips wound with the nuts and
+bolts.
+
+The Service Engineer should study the following safety points before installing the machine
+at the customer's place:
+
+!Utmost care should be taken while unpacking the boxes.
+
+ Always make sure that while unpacking the boxes the items contained in them do not
+        get damaged.
+
+                   While removing the screws, bolts or nuts from the boxes, make sure that the
+        instrument used for removing the screws, bolts or nuts do not penetrate in the box and
+        subsequently damage the contents of the box.
+
+        Extra Care should be taken while opening the heavier items as any sort of
+        carelessness can cause injury to the person handling the item.
+
+Follow the procedure below to open the packing:
+
+ (i)      Remove the metallic strips by opening the nuts and bolts with the spanners.
+ (ii)     Remove the wooden packing from the sides by removing the nails. Care must be
+          taken so that the contents of the box are not hit accidentally.
+ (iii)           Remove the thermocole packed material from the cardboard boxes after removing
+          the packing tapes used to close the boxes (wherever applicable) and then remove
+          thermocole packing sheet and polythene sheet by removing packing tape.
+
+--- [TEXT CHUNK 10] ---
+The unpacked parts must not be kept on the floor and can be kept on the packing sheets
+  removed earlier to avoid any scratches on the parts and to keep them clean. Do not touch the
+parts with dirty hands or rub them with a piece of cloth to avoid any dirt marks on the parts.
+
+       Check the contents of Packing as per Packing List along with the machine and report any
+damages or short shipments if any in prescribed format to Head Office.
+
+    
+                                      Infrastructural Requirements
+
+    3. INFRASTRUCTRAL REQUIREMENTS
+
+    3.1 SUPPLY AND WIRING REQUIREMENTS
+
+    Input Supply:
+
+     1 Phase 230 V AC ± 10%
+     50/60 Hz.
+     Line Resistance of 0.4 Ohms
+
+Note: The power line must not have a line resistance of more than 0.4
+Ohms. In case the line resistance is more than O.4 Ohms, the output of
+    machine may be reduced.
+
+    3.2 EARTHING REQUIREMENT
+
+    It is strongly recommended that independent earthing at zero potential is available at
+    Mains switch in the X-Ray Room where machine is to be installed. Independent earthing
+    not only enhances the performance and reliability of the equipment but it is also safe for
+    the operating staff as well.
+
+            
+    Infrastructural Requirements
+
+    3.3 SUGGESTED ROOM PLAN (For Fixed Installations only)
+
+    OPEN AREA
+
+    CHEST STAND
+
+WINDOWS ABOVE    TABLE
+ 2.5 m HEIGHT
+    ALLOWED
+
+                 PROTECTIVE      DOOR
+
+    TUBE STAND    BARRIER    (LEAD LINED)
+
+CONTROL
+ PANEL
+
+                     CHANGE
+    CASSETTE PASS    ROOM
+    BOX
+
+    DOOR
+    DARK ROOM
+             LIGHT TRAP
+    AIR                DOOR
+CONDITIONER
+
+SIMPLEST LAYOUT OF X-RAY ROOM AND DARK ROOM
+(FOR ROUTINE PROCEDURES IN A SMALL HOSPITAL)
+
+            
+Infrastructural Requirements
+
+3.3.1 X-Ray Room Layout Requirements
+
+1. Location of X-Ray Installation:
+
+--- [TEXT CHUNK 11] ---
+DOOR
+    DARK ROOM
+             LIGHT TRAP
+    AIR                DOOR
+CONDITIONER
+
+SIMPLEST LAYOUT OF X-RAY ROOM AND DARK ROOM
+(FOR ROUTINE PROCEDURES IN A SMALL HOSPITAL)
+
+            
+Infrastructural Requirements
+
+3.3.1 X-Ray Room Layout Requirements
+
+1. Location of X-Ray Installation:
+
+     The room housing diagnostic X-Ray unit equipment should be located as far away as
+     feasible from areas of high occupancy and general traffic, such as maternity and
+ paediatric wards and other departments of the hospital that are not directly related to
+ radiation and its use.
+
+Layout:
+
+  The layout of room in X-ray department should aim at providing integrated facilities
+      so that handling of X-ray equipment and related operations can be conveniently
+   performed with adequate protection. The number of doors for entry to the X-ray room
+        should be kept to the minimum. The doors and passages leading to the X-ray
+    installation should permit safe and easy transport of equipment and non-ambulatory
+    patients. The dark room should be so located that the primary X-ray beam cannot be
+ directed on it.
+
+Room Size:
+
+          The room housing an X-ray equipment must be spacious enough to permit
+     installation, use and servicing of equipment with safety and convenience for he
+  operating personnel, the servicing personnel and the patient. The room size must not
+ be less than the 180 sq. ft. for a general purpose X-ray machine
+
+4 Shielding:
+
+--- [TEXT CHUNK 12] ---
+4 Shielding:
+
+ Appropriate structural shielding shall be provided for the walls, the ceiling and the
+   floor of the X-ray room so that doses received by workers occupationally exposed to
+     the radiation and the members of the public are kept to a minimum and shall not
+   exceed the annual effective dose equivalent limits of 50 mSv and 1 mSv respectively.
+   The doors of an X-ray room shall provide the same shielding as that of the adjacent
+  walls incase persons are likely to be present in front of them when the X-ray unit is
+    energized. Appropriate shielding must be provided for the dark room to ensure that
+    undeveloped X-ray films stored in it will not be exposed to more than an air kerma
+ rate of 10 uGy per week (approximately 1.13 mR per week)
+
+5. Openings and Ventilation:
+
+ Unshielded openings, if provided in an X-ray room for ventilation or natural light etc.
+  must be located above a height of 2 meters from the ground/floor level outside the X-
+ray room.
+
+    
+Infrastructural Requirements
+
+6Illumination Control:
+
+ Room housing fluoroscopy equipment must be so designed that adequate darkness
+ can be achieved conveniently when desired in the room. A suitable red light must be
+ provided in the room for the use of radiologist after dark adaptation.
+
+7. Equipment Layout:
+
+ The X-ray equipment must be installed in such a way that in normal use the useful
+ beam is not directed towards control panel, doors, windows or areas of high
+ occupancy. The useful beam should preferably be directed towards unoccupied areas
+ of high occupancy. Sufficient area should be left around the X-ray table for safe and
+ free movement of equipment/trolley, radiology staff and service personnel.
+
+8 Control:
+
+--- [TEXT CHUNK 13] ---
+8 Control:
+
+In case of diagnostic X-ray equipment operating up to 100KV, the control must be
+ installed in a separate control room located outside but contiguous to the X-ray room
+ and provided with appropriate shielding, direct viewing and oral communication
+facilities between the operator and the patient.
+
+Waiting Areas:
+
+ Patient waiting area must be provided outside the X-ray room.
+
+10. Warning Light And Placard:
+
+ A suitable warning signal such as a red light must be provided at a conspicuous place
+ outside the X-ray room and kept 'ON' when the X-ray unit is in use to prevent
+ inadvertent entry of persons not connected with the examination. An appropriate
+ warning placard must also be posted outside the X-ray room.
+
+    
+    Infrastructural Requirements
+
+    3.4 AIR CONDITIONING
+
+ Although it is not mandatory to use this equipment in air-conditioned environment but
+maintaining a room temperature in the range of 25 to 30 C helps in providing sufficient
+    cooling to the unit and thus maintaining proper functioning and reliability of equipment
+
+    3.5 ROOM LAYOUT APPROVAL FROM REGULATORY
+        BOARD/BOARDS
+
+    Note: PLEASE REFER TO YOUR COUNTRY'S RULES AND REGULATIONS AS
+        APPLICABLE TO MEDICAL DIAGNOSTIC X-RAY EQUIPMENTS.
+
+    We suggest you to strictly follow the safety standards as applicable in your country for safety
+    from Electrical, Mechanical & Radiation related hazards.
+
+    No X-Ray unit shall be commissioned unless the layout of the proposed X-Ray installation is
+    approved by the competent authority.
+
+            
+                         Installation Procedure
+
+4. INSTALLATION PROCEDURE
+
+4.1 ASSEMBLY PROCEDURE
+
+1. Take the base of the mobile unit and place it on the floor. The base is provided with the
+four wheels, two fixed wheels on the front side and two rear wheels inside the base on its
+backside. The backside wheels are steering wheels for the base movement.
+
+Square Grooves for
+Counter Weight
+
+Foot Lock
+
+--- [TEXT CHUNK 14] ---
+Square Grooves for
+Counter Weight
+
+Foot Lock
+
+2. Lock the base with the help of the mechanical foot operated break provided on the right
+ hand side of the base (The position for locking and unlocking of the foot break is
+ indicated near the break).
+
+3. Open all the (12) screws fixed on the top of the base. Care must be taken that all the
+ screws are kept on the safe place along with all the spring and the plane washers, as they
+ will be required to fix different parts on the base.
+
+4. Take the counter weight and clean this with a piece of cloth from all the sides and make
+ sure that the rubber strips mounted on the top and bottom sides of the counter weight are
+ extended a little out and the screws to fix these rubber strips are tightened properly
+ (These rubber strips are fixed for the reason that when the weight moves inside the
+ column, noise of the weight due to touching with internal sides of the column can be
+ dampened). Take the steel ropes and fix one end of the steel ropes to the counter weight
+with the help of the spanner or the adjustable spanner tightly.
+
+    
+Installation Procedure
+
+Put the counter weight in square grooves.
+
+     6.Take a long rope/ string and tie open ends (having bolts fixed on them) of steel ropes
+        with this rope/ string properly. Now pass the steel ropes from the bottom side of the
+        column so that open ends come out of the topside of the column.
+7.Lift the column with the help of two people and put it on the counter weight which is
+      placed in the square grove in the base and ensuring that the string and the steel ropes
+           remain outside the top of the column. Make sure that the backside of the column is
+towards the backside of the base and the front side of the column faces the front side of
+  the base. Take care that that steel ropes don't fall back in the column by tying the string
+properly.
+
+2020                                                                   220
+
+--- [TEXT CHUNK 15] ---
+2020                                                                   220
+
+8. After placing the column on base over the counter weight properly, tight the eight bolts
+        removed in step 3.
+
+TIGHT THE EIGHT
+BOLTS
+
+    
+Installation Procedure
+
+9. Take the pulleys, spacers and the shaft. Make sure that the arrangement of spacers and
+the pulleys are as shown in picture below.
+
+20
+
+10. Slide the vertical carriage inside the column as shown. Now take the steel ropes from the
+top of the pulleys and remove the string tied to ends of steel ropes.
+
+1 1. Tight the open end of the steel ropes to the threaded space provided on the top of the
+vertical carriage. Make sure that the steel ropes do not overlap at any point and are
+crossing over to their respective side pulleys.
+
+    
+Installation Procedure
+
+12. Fix the column top cover with the help of two screws & then open the control cover by
+opening the 8 screws.
+
+Allengers    20
+
+Tighten the screw
+on both sides
+
+13. Put the control on the base & tighten the four screws as removed during step 3.
+
+Tighten the four
+screws
+
+14. Move the top panel upwards and remove 4 screws (2 on each side of control) used to fix
+    control handle. Fix the Hand switch clamp on top panel side by holding the clamp as
+20  shown and fixing 2 Nos. screws from inside the top panel.
+    20
+    20                                                                                    20
+
+    
+Installation Procedure
+
+15. Fix the tube head hanger to the X-Ray tube head with the Allen key after sliding the
+hanger on the blocks provided on the sides of the tube head
+
+20    20₂
+
+      16. Open the bolt and the washers from the tube head hanger.
+
+       17. With the help of a person bring the Vertical carriage in the column down and lock it
+       properly with the locking knob provided on the lower side of the vertical carriage. Make
+      sure that the vertical carriage is still held by a person even after locking it properly.
+
+--- [TEXT CHUNK 16] ---
+17. With the help of a person bring the Vertical carriage in the column down and lock it
+       properly with the locking knob provided on the lower side of the vertical carriage. Make
+      sure that the vertical carriage is still held by a person even after locking it properly.
+
+    
+                                                                       Installation Procedure
+
+18. Insert the tube head hanger inside the hole with a bush provided in the front of vertical
+       carriage and tight it with the bolt and the washers. Make sure that firstly the spring
+    washer, then the bigger plane washer and then the smaller plane washer is inserted in the
+        bolt. The washer arrangement is to make sure the free movement of the tube head in al
+    the directions.
+
+                   Tight the bolt and
+                   washers
+
+    19. Care has to taken while fixing the tube head that the Tiltometer i.e. the angle deflection
+    meter fixed on the tube head must face the operator.
+
+    20. Make the connection of tube head and tight the clamp.
+
+    CLAMP FOR HOLD
+    THE CABLE
+
+            
+    Installation Procedure
+
+    21. Remove the four screws from the strips on the tube head provided to mount the LBD.
+
+ 22. Fix the LBD on top of the tube head with the four screws. While fixing the L.B.D care
+must be taken that the switch fixed on the L.B.D. for the switching on the light bulb must
+    face to the front i.e. towards the operator side for the convenient operations
+
+    TIGHT THE
+    FOUR SCREWS
+
+    23. Tight the two screws (one on each side) for tighten the control top.
+
+    TIGHT THE
+    SCREW
+
+    CONTROL TOP
+
+    Control
+
+            
+Installation Procedure
+
+4.2 INSTALLATION CHECKPOINTS
+
+--- [TEXT CHUNK 17] ---
+TIGHT THE
+    FOUR SCREWS
+
+    23. Tight the two screws (one on each side) for tighten the control top.
+
+    TIGHT THE
+    SCREW
+
+    CONTROL TOP
+
+    Control
+
+            
+Installation Procedure
+
+4.2 INSTALLATION CHECKPOINTS
+
+Column stand installation is vertical and not tilted
+The column should be firmly fixed on the base
+Foot lock of column is functioning
+The steel wire ropes tension should be uniform
+ Counter Weight Up/Down movement is not noisy
+On moving the tube head, the counter weight does not make any sound
+On moving up the vertical carriage to the uppermost position, the counter weight
+doesn't make a thud sound and instead it rests on a rubber stopper
+All screws are tight and are not loose
+
+ The Tube Head is mounted on the Stand properly and is not tilted axially
+ The LBD is mounted properly and is not tilted. X-Ray and light beam are aligned
+ The movement of shutters of the LBD is smooth and the light intensity is good
+The Up/Down Movement of the Tube is fully counter balanced
+The movement of the pulleys is smooth and is functioning properly
+The cover of the column is properly placed on top of it
+Cross mark is fixed on the LBD
+
+Locking knobs of vertical carriage are functioning properly
+
+    
+Installation Procedure
+
+4.3 INTERCONNECTION OF VARIOUS ASSEMBLIES
+
+Make the electrical connections of various assemblies as per inter connection details.
+
+P              TS1-12
+               MOV
+N              TS1-11
+
+E              TS1-10
+
+MAIN SWITCH    TS1-1             F1
+               TS1-2             F2
+
+               TS1-3             mA
+
+               TS1-4             GND
+
+               TS1-5             P2
+
+               TS1-6             P1
+
+               TS1-7
+
+               TS1-8             LBD SUPPLY
+
+                                 TUBE HEAD
+               TS2-4     230V              BUCKY SUPPLY
+
+               TS2-5     OV                FOR TABLE
+
+--- [TEXT CHUNK 18] ---
+TS1-5             P2
+
+               TS1-6             P1
+
+               TS1-7
+
+               TS1-8             LBD SUPPLY
+
+                                 TUBE HEAD
+               TS2-4     230V              BUCKY SUPPLY
+
+               TS2-5     OV                FOR TABLE
+
+               TS2-6     230V              ELECTROMAGNET
+                                           SUPPLY FOR TABLE
+               TS2-7
+
+               TS2-8     NOT USED
+
+               TS2-9
+
+               CONTROL
+
+    
+Installation Procedure
+
+4.4 ASSEMBLY PROCEDURE
+1After installation of tube stand as per their installation procedure, follow these steps:
+
+2.Do electrical connections as follows:
+  Note: A proper Earth connection must be available & all parts of X-Ray machine
+  must be earthed.
+  TS1-1 of Control to F1 of Tube Head
+  TS1-2 of Control to F2 of Tube Head
+  TS1-3 of Control to mA of Tube Head
+  TS1-4 of Control to GND of Tube Head
+  TS1-5 of Control to P2 of Tube Head
+  TS1-6 of Control to P1 of Tube Head
+ On the tube head, brass bolts are provided for the interconnections of the tube head and
+ control. Each bolt is marked for connection to the control.
+
+        ! Do not tighten the nuts on brass bolts with excessive force as they may break by
+ applying extra force.
+
+       3. Connect LBD supply from TS1-7 & 8 of Control. For this, wire with Male socket is
+  provided. Connect open ends of this wire to control terminal strip as above in 4.3 and
+  male socket into female socket on LBD.
+  Terminal Strip TS1 is located on back plate inside control.
+
+PRECAUTION TO BE TAKEN WHILE ASSEMBLING
+A Gap between mA and Earth strip should be approximately 1 mm.
+The Earth wire on the HV Transformer should be properly tightened
+ All connections on the Tube Head should be firmly tightened
+
+    
+              Installation Procedure
+
+4.5    FOR VOLTAGE (P1 & P2) AND LCD
+       PROCEDURE
+       BRIGHTNESS ADJUSTMENT.
+
+MOTHERBOARD CARD ON TOP OF THE CONTROL
+
+--- [TEXT CHUNK 19] ---
+Installation Procedure
+
+4.5    FOR VOLTAGE (P1 & P2) AND LCD
+       PROCEDURE
+       BRIGHTNESS ADJUSTMENT.
+
+MOTHERBOARD CARD ON TOP OF THE CONTROL
+
+                                                                   LCD
+                                                                   Brightness
+PRAMRR                                                             (R7)
+
+                                                          Variac
+          Adjustment (R4)
+
+1. After making all the connections switch ON the machine.
+2. To adjust the brightness of LCD vary the preset R7 (If Required)
+3.To change the P1-P2 vary the preset R4 (If Required)
+
+    
+                                                         Installation Procedure
+
+4.6 INSTALLATION CHECKPOINTS
+
+4.6.1 Control Panel
+ All wiring inside the control is with proper thimbles and harnessed so that the wiring
+  is away from wire wound resistors.
+  Necessary Strain Relief (cable tie) etc. is fixed, so that, the wiring does not come out
+  when pulled.
+  No hole in the control is left open so that Rats & Mice should not enter the control.
+ All meters are functioning properly.
+ o
+ Movement of all the Switches is smooth.
+
+ 0 Display is functioning properly and the intensity is uniform.
+ Panel plate is clean and is free from scratches.
+ Control's general appearance is tidy and clean.
+ All covers are fixed properly and no screw is left loose
+
+ 4.6.2 Tube Head
+
+ No Oil Leakage is observed.
+
+  All wires are thimbled and fixed to terminals. Proper strain relief is used on wires sc
+  as to avoid any disconnections.
+
+4.6.3 General Checks
+General appearance of machine is clean
+  Machine parameters are calibrated properly
+ Light & X-Ray beam matches.
+Filter in the Tube head cover is present
+  LBD doesn't move on handling with respect to Tube Unit.
+
+--- [TEXT CHUNK 20] ---
+KVP SETTING  RELAY  RELAY'S CONTACT LOCATION  Allengers 100
+SSR  MA KVP VOL.  1RE1ON/OFF 12V/12A  A6
+NO  2 RE2 READY 12V/6A  C5  RE1-A B1
+1  25  100 245  X-RAY SSR 50A  B6  RE1-B A6
+2  50  80  219  SSR 25A  RE1-C
+100
+3  60  212  SSR  RE2-B  80
+NOTE  ADJUST THE R4 F  MA
+MOTHERBOARD CARD  FUSE DETAIL & LOCATION  RE4-A  C4  0 BA  M  RE1-B
+SET POINT  1 LINE 25A  RE6-A  RE6
+1R7 LCD BRIGHTNESS SET  2 FIL.4A  RE5  NOT USE
+R4 KVP VOLTAGE SET  3 MOTHER 2A  22  2  XIM  RE1
+3 R12 MAX.TIME SET  4 LLBD 4A  8  1  J8 4s 3J9
+MCB  3  OV(R)
+TS 1-12  16A  ABS X-MER
+LINE  25A  12V  J1-10  J2-10  ON/OFF SUPPLY 12V  5  2J4
+F1  0  J1-1120J2-11  GNO  J4 6  3  J5  RE4
+MOV  BEFORE ON  12V  J1-1  J2-1 RELAY SUPPLY 12V  V-BUCKY
+250V  0  J1-2  J2-2.  OV(R)  5  7  H-BUCKY  RELAY CARD
+TS 1-11  -12V  6  8  ON/OFF  5  OV(R)
+NEUTRAL  TAP NO.  9  +12V(R)  BUZZER
+26-7.5  J1-6  J2-6  +5V  J7 MOTHER  10  KVP UP  3  J2
+ B  TS 1-10  RE1-A  25-0  J1-7  J2-7  11  RE2-B
+TS 1-4  RE1-C  24-12.5  J1-8  J -8.1  BOARD  12  KVP DOWN
+GND  23-0  J1-9  J2-91  +15V  CARD  NOT USE
+VOLT  22-15.5  J1-3  W  J2-3  MA-1  (H-BUC.)TS 2-4
+COMP  21-0  J1-4  J2-4G  MA-2  6  RE2-C
+TCH  20-24.5  14A|  TS 1-7LBD SUPPLY  MA-3
+20  FINE  19-0  TS 1-8 24V AC  FOR AUTO 20  J3 4  MA-4  8  TS 2-7
+(S1)  18-260  OLTAGE  SV SUPPLY   K-MER  5  MA-5  J3  9-   20 (v-BUC.)
+17-250  METER  J5  FILSEL  10
+16-240  J6  J1  7  EXP.
+15-235  2 8  LIGHT  8
+RE5  RE6  14-230  H
+SR-A  SSR-A  13-225  OV(R)
+MICRO  12-220  RE2  COM. MA
+SW  MICRO  11-215  NOT USE  25 MA
+RC NET  SW  10-210  50MA
+WORK  9-205  V1
+ c  8-200  TS 2-6  100 MA
+7-195
+KVP  6-190  25  50100  RE2-A  JUMPER
+MOTOR  5-185  470K/400V  TS1-4
+4-180  KVP SENSE X-MER  TS1-3
+3-175  0-12V X-MER  G
+2-170  TS 2-5  750 OHM/150W  TS1-6  mA 20
+AUTO  RE4-A  P1   P2
+BOOSTER  X-MER  TS1-5
+X-MER  10  120  F1
+
+S2  R1 25 W W  470K/400V  TS1-1  F2
+BOOSTER RESISTANCE  14A  TS1-2  L
+
+ D
+engers
+: WIRING DIAGRAM FOR ALLENGERS 100
+(APR-LCD)
+DRG. NO.: E-464, R1  APPD
+
+--- [TEXT CHUNK 21] ---
+S2  R1 25 W W  470K/400V  TS1-1  F2
+BOOSTER RESISTANCE  14A  TS1-2  L
+
+ D
+engers
+: WIRING DIAGRAM FOR ALLENGERS 100
+(APR-LCD)
+DRG. NO.: E-464, R1  APPD
+
+REV.  24-07-2010 TWO CAPACITORS 470K/40OV ADDED, FOR BUCKYSUPPLY & ELECTROMAGNET SUPPLY  24-07-2010  2K100710088-X  CHKD
+DATE  REMARKS ON REVISION  CHKD  APPD  IMP. DATE  W.EF. MACHINE SR. NO  DRN  10-03-2010
+
+Circuit Diagram & Circuit Explanation
+
+6.1 CIRCUIT EXPLANATION
+
+--- [TEXT CHUNK 22] ---
+Circuit Diagram & Circuit Explanation
+
+6.1 CIRCUIT EXPLANATION
+
+ 1. Plug in the machine at 230V AC 50/60Hz (Single Phase Supply)
+2.Supply 230 V AC will be available at TS1-12 & TS1-11.
+ 3. After pressing the ON Switch 0V supply will be available to RE1 Coil through K13
+  relay NO contact & 12V will be available directly from J2-1.
+4. When REl relay becomes ON all its Contacts will become short & RE1A, RE1C will
+  become close and Line & Neutral will be available to further circuit.
+5. This way OV P1 will be directly available at Tube Head terminals and similarly F2
+  will be available directly through Booster X-Mer secondary
+ 6.Now by default Machine will become ON in APR mode.
+7. Now when we Switch ON the machine filament voltage F1 will reach to Tube Head
+  through the corresponding relay selection i.e. 25, 50 & 100
+ 8. Now on pressing Ready Switch our relay (K16) in Relay Card will become ON and
+  its Contact will pass the 0V supply to RE2 Coil.
+9. NO Contact (RE2A) in series with filament resistance gets closed and filament now
+  boosted voltage.
+  10. NO Contact (RE2C) connected in series with Bucky Supply gets closed & Bcuky
+  Grid starts oscillating if Bucky Switch is selected in 'IN' Position.
+  11. NO Contact (RE2B) in series RE4 gets closed.
+  12. On pressing Ready Switch KVP Motor starts to adjust the actual KVP position for
+  this our K14 or K15 Relay become ON which further makes RE5 & RE6 ON.
+ 13. Which further moves the motor either in forward or reverse direction.
+  14. On pressing the X-Ray Switch Relay K1 become ON which makes the Relay RE4
+  gets energized as RE2B is already closed.
+ 15. When RE4 gets energized RE4A becomes closed and supply P2 will be available at
+  TS1-5, whereas P (0V) is available when we Switch ON the Machine.
+  16. After pre selected time X-Ray signal from Motherboard Card J9-3 will be high &
+  Relay K1 becomes OFF and our X-Ray terminates.
+
+    
+Calibration and Testing
+
+7. CALIBRATION AND TESTING
+
+--- [TEXT CHUNK 23] ---
+Calibration and Testing
+
+7. CALIBRATION AND TESTING
+
+ 7.1 ENERGIZING THE EQUIPMENT
+
+7.1.1 The equipment must be energized after ensuring that the input voltage is correct,
+        earthing is connected to the equipment, all connections are correctly made, there are
+        no loose connections and rating of fuses is correct.
+
+      Wait for 5 minutes before exposure is initiated to ensure proper warm up of the
+7.1.2
+       equipment.
+
+7.1.3  Check filament glow inside the Tube Head through its window.
+
+7.1.4 Always start with low rated exposure at low kV& mAs and then gradually increase
+       the factors.
+
+ 7.2 CARRYING OUT PRELIMINARY TESTS
+
+ Once the machine is energized, check the following in equipment
+
+7.2.1  No abnormal sound / sparking in the equipment.
+7.2.2  No burning / overheating smell from equipment.
+7.2.3   No fuse should blow.
+7.2.4   Radiographic exposure should not initiate automatically.
+7.2.5   Check that all displays i.e. mAS, KVP etc. glow at all time intervals selected and at
+        all mA stations.
+
+    
+Calibration and Testing
+
+7.3 CALIBRATING THE EOUIPMENT
+
+7.3.1 Check the Overload Settings as follows:
+      mA      KVP            mAs
+      50     100             115 mAs
+       100    80             15 mAs.
+       100    60             85 mAs
+      All Overload setting as per Micro Controller based
+
+7.3.2         Check the mAs in mAs meter at all stations by making exposure at 70 KVP and 20
+                mAs for 25 & 50 mA and for 100 mA, select 70 KVP on machine and check on kVp
+          meter if kvp is + 5% then is OK, if very then adjust from Pot R4. Check the mAs on
+        TS1-3&4 and adjust from 750 Ω/150W resistance.
+
+--- [TEXT CHUNK 24] ---
+Separate bands are provided for 25, 50 & 100 mAs on resistance of 750 Ohms, 150
+        Watts) mounted vertically near Variac. If mAs value is to be increased in mAs meter.
+          then move the band for selected mAs station in downwards direction. If mA value is
+        to be decreased then move the band for selected mAs station in upwards direction. If
+       mA value is to be increased on all mA stations then move the common band upwards
+       near the 100 mAs band.
+
+    
+Calibration and Testing
+
+                 Auto
+mA Adjusting     Transformer
+Resistance
+                 Booster
+                 Transformer
+
+                           0-12     ABS
+                                    Transformer
+                           Transformer
+Check P1-P2 current as per following table. The value of P1-P2 current mentioned in
+following table is approximate value of current that flows under normal operating conditions:
+
+S. No.    mA Station  KVP  mAs      P1-P2 Current
+  1           25  100      25         8.0 Amps.
+  2  50      86            50         17.0 Amps.
+  3  100     56            100      33.0 Amps.
+
+7.3.3  Check the functioning of the Booster Transformer at following parameters:
+        50 mA, 70 KVP, 50 mAs.
+        Make an exposure at above factors. The filament supply should be stable during the
+        Exposure. This voltage is noted down with the help of the calibrated Analog
+       Multimeter between terminals 1-2 of TS1. If voltage is not stable during exposure
+        across these terminals. Check the Capacitor on Booster Transformer.
+
+                                       
+                                                                 Calibration and Testing
+
+7.3.4 Check L.B.D. Supply across TS1-7 & 8 terminals with calibrated digital multimeter.
+ It should be within 24 ± 1 Volts.
+
+--- [TEXT CHUNK 25] ---
+Calibration and Testing
+
+7.3.4 Check L.B.D. Supply across TS1-7 & 8 terminals with calibrated digital multimeter.
+ It should be within 24 ± 1 Volts.
+
+7.3.5 Check Bucky Supply across TS2 terminals 4-5 and pressing Ready switch. It should
+ be within 230 ± 10 Volts. For this purpose the Bucky switch should be at IN position.
+
+7.3.6 Hand Switch is checked physically for its proper operation.
+
+7.3.7 Check the filament voltage boosting between F1 and F2 by placing calibrated digital
+ multimeter between TS12. Note down the reading of the Voltage initially and then
+ note the voltage of the Filament pressing Ready switch.
+ The Boosting should be about 50 + 10 Volts
+
+7.3.8
+The Radiation and the Optical Field of the Collimator is always factory adjusted but
+     in case the adjustment gets disturbed then any shift in the X Axis can be adjusted with
+       the help of the Front Adjusting Screw. Any shift in the Y Axis can be adjusted with
+           the help of the Bulb. To check this select 50 mA, 60 KVP & 50 mAs. Place the
+     Fluoroscent screen under the collimator. The X-Ray room should be made dark.
+        Switch On the light field on collimator. Adjust the light field to fall on area of
+     fluoroscent screen. Switch OFF the light of collimator and make exposure at selected
+         factors in the dark X-Ray room. X-ray field must fall on the area of fluoroscent
+      screen. If alignment of light beam and X-ray field is not matching then adjust either
+     from front screw or bulb as required.
+
+    
+Calibration and Testing
+
+UNLOCK  LOCK    UNLOCK  LOCK    Press to ON
+                                Switch
+
+Shutter Movement Knobs
+
+20
+
+Adjustment in Bulb for Shift in Y-axis
+
+    
+Calibration and Testing
+
+ 7.4 PROCEDURE FOR CARRYING OUT QA TESTS AS PER
+ REGULATORY BOARD.
+
+--- [TEXT CHUNK 26] ---
+Calibration and Testing
+
+UNLOCK  LOCK    UNLOCK  LOCK    Press to ON
+                                Switch
+
+Shutter Movement Knobs
+
+20
+
+Adjustment in Bulb for Shift in Y-axis
+
+    
+Calibration and Testing
+
+ 7.4 PROCEDURE FOR CARRYING OUT QA TESTS AS PER
+ REGULATORY BOARD.
+
+The aim of quality assurance (QA) tests in diagnostic radiology is to ensure good quality
+ images with optimal doses. Images of poor quality will necessitate retakes and can result in
+unnecessary doses to patients, personnel and public and overloading of the machine. The
+parameters that affect the quality of the image include:
+
+     1.      Applied tube potential (kV)
+     2.      Quantity of radiation reaching the film, which depends on the current and time of
+            exposure (mAs)
+     3.     Focal spot size
+ 4.         Beam alignment
+     5.     Congruence of optical and radiation fields
+     6.      Contact between film and screen
+     7.     Processing conditions
+
+ The QA programme begins with the specification of performance of the equipment at the
+                manufacturing stage (performance standards tests) and then includes the tests after
+ installation in the hospital (acceptance tests) to ensure conformity with the specifications.
+ The QA tests are carried out thereafter at regular intervals, after repairs that might affect
+ performance and when equipment malfunction is suspected.
+
+ The rate of film rejection - in other words, the number of retakes - may indicate inefficient
+             operation and this should be periodically analyzed to ensure good QA. This could also help
+ to identify performance deterioration, which requires service attention.
+
+--- [TEXT CHUNK 27] ---
+The rate of film rejection - in other words, the number of retakes - may indicate inefficient
+             operation and this should be periodically analyzed to ensure good QA. This could also help
+ to identify performance deterioration, which requires service attention.
+
+ The radiologists and the radiographers should be educated on the importance of the QA tests.
+ The importance of obtaining good quality images keeping the doses to levels as low as
+ reasonably achievable (ALARA) to patients, staff and public must be stressed.
+ Simultaneously, requirements in respect of filtration, collimator, leakage radiation, safe work
+ practices and proper installation planning must be fulfilled.
+
+ The Q.A Tests as specified in the local radiation safety standards may be carried out. Please
+ refer to your country's directives with regard to this.
+
+    
+                                                                  Troubleshooting
+
+8. TROUBLESHOOTING
+
+--- [TEXT CHUNK 28] ---
+S. Fault Symptoms          Remedial Action
+No.
+1     Machine does not     Check the single-phase input supply at the mains switch/socket
+   get 'ON'                Check F1 Fuse of 25 Amps. It may be blown. Replace the fuse if it
+                           is blown.
+                           Check the input supply at Terminal TS1-12 & TS1-11. It should be
+                           230 V AC. If supply is not available at above terminals then wire
+                           may be open between mains socket to Input terminals of control.
+                           Switch OFF the machine from mains and then check the MCB, it
+                           should show continuity between its terminals during ON position.
+                           If MCB is not showing continuity then replace the MCB.
+                           Check OFF Switch. It should show continuity between its contacts.
+                           If multimeter does not show continuity then replace the switch.
+                           Check the 230 V AC at the input of ON/OFF transformer.
+                           Check the output of ON/OFF transformer at input terminals of
+                           rectifier. It should be 12-0-12 & 0-12 Volts AC. If output is not
+                           available then replace the transformer.
+                           Check the input at J1-1 & 2 of Power Supply Card it should be
+                           12V and at J1-8 & 9 it should be 12 V AC. Check the output at J2-
+                           1 & 2 of Power supply Card it should be 12V DC & J2-8 & 9 is
+                           should be 12V DC. If output is not available then replace the Card.
+                           Check the ON/OFF Relay whether it is getting energized or not. If
+                           relay is not getting energized then relay coil may be faulty i.e.
+                           open. Replace the relay.
+
+--- [TEXT CHUNK 29] ---
+Check the ON/OFF Relay whether it is getting energized or not. If
+                           relay is not getting energized then relay coil may be faulty i.e.
+                           open. Replace the relay.
+                           Check the ON/OFF Relay series with Variac A contact. It should
+                           show continuity when checked with multimeter by pressing the
+                           contacts manually. If multimeter is not showing continuity then
+                           replace the Relay (Coil may be OK but contacts are faulty).
+                           Common point of Variac contact D may be open from ON/OFF
+                           relay's contact B.
+2     Fuse F1 blowing      Tube head may be faulty and drawing heavy current. P1-P2 current
+      OFF                           should draw maximum 33 Amps. When checked with Tong Tester
+          (F1 is the Mains at full load i.e. 100 mA station. This fault will only occur during
+      fuse of 25 Amp.)     exposure.
+                          mA meter may be faulty i.e. showing less mA at the time of
+                           calibrating the machine. This can only happen at 100 mA station.
+                           LINE & NEUTRAL on ON/OFF Relay may be short with each
+                           other. Contacts of ON/OFF Relay may be short inside the relay.
+
+--- [TEXT CHUNK 30] ---
+Page35
+
+                                                                        Troubleshooting
+
+3     Fuse F2 blowing         Filament supply i.e. F1 & F2 wires may be touching with ground
+      OFF                     or short with each other.
+      (F2    is   Filament
+      supply fuse of 4
+      Amp.)       blowing
+4     Fuse F4                 LBD supply wires may be short. Check the connector also for any
+      OFF                    shorting of wires and check the edge connector's 5 & 6 pin of Time
+      (F4 is                 Dealy Card.
+      LBD/Collimator          Check LBD bulb holder. It should not give continuity with ground
+      fuse of 4 Amp.)         Check for shorting of LBD supply wires with grounding due to
+                             cracks or cuts.
+ 5     Exposure       starts  Check X-Ray switch on the Control Panel or in hand switch. It may
+       when       Ready  is be short.
+      pressed                   Check Exposure SSR relay contacts particularly Exposure Relay-A
+                              contact with multimeter. It may be short.
+ 6     Machine not            (i) Check filament supply between TS1-1 (F1) & TS1-2 (F2). It
+       exposing on any mA                should be approximately 150 V AC and on pressing ready
+       station                 switch voltage should boost by 50 + 10 volts. If filament supply
+                               is not available at above terminals then:
+                               a Fuse F2 may be blown.
+                                          Common band of filament resistance of 750 Ohms may be
+                                    dry soldered or open.
+                                c)
+                                            Check common wires of Relay Card at J2-7, 1 & 2 for
+
+--- [TEXT CHUNK 31] ---
+d) proper connection
+                                             Check the output at TS2-5 & 6 of CVT Transformer, it
+                                    should be 230V AC.
+                              (ii) If filament supply is available at Terminal strips TS1-1 w.r.t
+                                 TS1-2 then check filaments physically for glowing in the tube.
+                                At 25 mA, 50 mA and 100 mA stations, filament should glow.
+                              (iii) If filament is not glowing then:
+                                (a)      Check filament voltage between F1 & F2 at terminals on
+                                      Tube Head. If supply is available at above terminals then
+                                        follow next step otherwise check wiring between Control
+                                     and Tube Head. F1 or F2 wire may be broken.
+                               (b)        Either Filament transformer may be faulty inside tube
+                                          head or Filament may be open inside tube. Replace the
+                                    tube head.
+
+    Page36
+
+                                                                        Troubleshooting
+
+--- [TEXT CHUNK 32] ---
+Check P1-P2 voltage during exposure at terminals TS1-6 & TS1-5.
+                                 If P1-P2 voltage is not available then:
+                                    (i) Check that whether P2 wire is connected properly at contact A
+                                  of Variac.
+                                   (ii) Check Exposure coil supply at its terminals. It should be 15 V
+                                  DC. If supply is available then check whether Exposure Relay
+                                  is getting energized or not. If it is not energized then replace
+                                  Exposure Relay. Also check Exposure Relay-A contacts,
+                                  whether they are working or not.
+                                 (iii) Check the Exposure Relay on Relay Board
+                                 (iv)If Exposure Relay's contacts are working properly and P1-P2
+                                   voltage is not coming then, check common point of Variac
+                                   Contact E. It may be disconnected.
+                                If P1-P2 is available at Tube Head and exposure is not taking
+                                 place, then replace the tube head, as H.V. Transformer or Rectifier
+                                 diode may be faulty inside tube head.
+ 7     mA meter                  Tube may be gassey. To check this, remove F2 from Tube Head
+       overshooting              and make exposure at 50mA/60 KVP. If blue light is visible in tube
+                                then tube is gassey.
+                                Tube head may be defective. Some connection in Tube head may
+                                 be short from inside.
+                                 mA meter may be defective. To check this, make exposure at 55
+                                 KVP & 50 mA. Measure P1-P2 current. It should be around 17
+
+--- [TEXT CHUNK 33] ---
+be short from inside.
+                                 mA meter may be defective. To check this, make exposure at 55
+                                 KVP & 50 mA. Measure P1-P2 current. It should be around 17
+                                 Amperes. If current is around 17 Amps on tong tester then mA
+       MCB 16 Amp.               meter is defective.
+ 8     Tripping                 Calibration may be wrong if machine is delivering more mA than
+
+--- [TEXT CHUNK 34] ---
+continuously         specified at full load.
+                                 mA meter may have error.
+                                 Tube head may be drawing high current
+                                 MCB may be defective. Check if MCB is tripping under normal
+                                conditions also.
+9       Voltage       drop is    Under normal calibration conditions voltage drop should not
+        more than specified      exceed 10% of the available voltage at full load. If voltage drop is
+      limit.                     more then check the wires used for supply to machine These
+                                 should be of appropriate gauge. Also check the Line Resistance. It
+                                 should not be more than 0.4 Ω as per Indian Electricity Distribution
+
+10    X-Ray           contactor  Rules. More the line resistance more will be the voltage drop.
+      chattering        on Also check the Exposure Relay-A contact if it is working properly.
+      pressing          X-Ray
+11     switch
+       mA output suddenly        Problem may be due to the rectifier open in the tube head.
+        drops to half of the    Tube may be faulty.
+        set values               mA meter may be defective.
+
+    Page37
+
+                                                                         Troubleshooting
+
+12      Exposure       taking  Check for spark gap of mA & GND. Terminals may short through
+      place but mA meter       mA & GND strips. There should be approx lmm Gap between
+      does not show any mA & GND strips.
+
+--- [TEXT CHUNK 35] ---
+13     deflection              mA meter may be defective.
+       Exposure does not       Check the micro controller at Pin No. 15, the supply should be 0V
+       terminating at all on  when exposure.
+       all mA stations         If common point of Wirings dry solder, solder it properly
+                               Servo Final Card may be defective.
+14     LBD Bulb not            Check fuse F4. It may be blown
+      glowing                  Check LBD supply at LBD connector. It should be 24 V AC. If it
+                               is not coming then wires from control to LBD may be broken.
+                               Check the ON-OFF toggle switch provided on LBD. It may be
+                               open.
+                               Check the LBD Bulb. It may be fuse
+                               Check the contacts of LBD bulb with the bulb holder. Remove the
+                               carbon deposited on contacts with the help of sand paper
+15     Centering of light &    For centering of light & X-Ray beam the position of LBD bulb
+      X-Ray beam is not should be horizontal.
+      proper                   Shift the light beam towards X-axis with two screws provided on
+                              LBD (If required).
+                               Shift the light beam towards Y-axis by adjusting it with the help of
+                               LBD bulb itself (If required).
+                               Always use the LBD bulb with tilted filament not with straight
+                               filament to get the sharp and clear edges.
+                               Adjust the cross with centre by loosening the four screws provided
+                               on LBD brackets and moving the Glass in desired direction
+ 16    X-Ray quality is not    Check the dark room conditions, i.e. there should not be light
+      proper                   leakage in dark room.
+
+--- [TEXT CHUNK 36] ---
+on LBD brackets and moving the Glass in desired direction
+ 16    X-Ray quality is not    Check the dark room conditions, i.e. there should not be light
+      proper                   leakage in dark room.
+                               Check the developer and fixer solution quality
+                               If calibration is not proper, then also the image quality will be
+                              poor.
+                              If there is major spot on the anode side of X-ray tube.
+                              Films used should not be foggy and the intensifying screens in
+                              cassettes should be clean.
+ 17   Machine is not           Check if OFF Switch is permanently short
+        getting OFF            If ON/OFF relay 'C' contact is sticky then machine will remain
+                               OFF only when we press off switch and becomes ON again when
+                               we release off switch.
+                              If ON switch is directly short.
+ 18     Electric Shock on      Improper ground may lead to this condition
+        Touching Machine       Any live wire may be touching the body of machine.
+                               Check all the wires going to tube head, bucky for any cut on
+                               insulation. & Routing of these wires through the sharp edges
+
+--- [TEXT CHUNK 37] ---
+Page38
+
+                                                        Post Installation Instructions
+
+9. POST INSTALLATION INSTRUCTIONS
+
+9.1 The Party Code stickers and our Contact Numbers should be pasted on the equipment as
+per the place specified.
+
+9.2 Technic chart should be fixed near the machine and operator/customer should be
+explained the Technic chart.
+
+9.3 The Service Engineer should demonstrate the equipment to the operator. The operator
+should be given training on essential Do's and Don'ts like ---
+
+ a. Use as much of Shielding material as possible, use lead screens, lead aprons, lead
+ goggles and shields etc.
+ b. Radiation Dose should be as low as reasonably achievable
+ c. Use collimators/cones and collimate radiation field to the smallest possible area.
+ d. Before giving an exposure for the first time in the day, try to warm up the
+        equipment for 10-15 minutes. For this purpose simply switch ON the machine and
+ leave it as it is.
+
+9.4 The Equipment should be handed over to the customer. The Installation Report should be
+properly filled along with the Warranty Card and required Serial Nos.
+
+    
+                                                 Dark Room Procedures & X-Ray Film Processing
+
+10. DARK ROOM PROCEDURES & X-RAY FILM
+  PROCESSING
+
+Dark Room Procedure:
+
+To obtain the best results from the X-Ray Machine, following procedure should be observed in Dark
+Room: -
+
+--- [TEXT CHUNK 38] ---
+Dark Room Procedures & X-Ray Film Processing
+
+10. DARK ROOM PROCEDURES & X-RAY FILM
+  PROCESSING
+
+Dark Room Procedure:
+
+To obtain the best results from the X-Ray Machine, following procedure should be observed in Dark
+Room: -
+
+ 1. A qualified and trained Radiographer should only be allowed to operate the
+  X-Ray Equipment.
+ 2. Dark Room should be totally dark and no light should enter in the room.
+  3. Loading and unloading of films in the cassette should be done only in Dark Room under standard
+  safe light.
+  4.Films should be stored in Dry and Dark place.
+  5. The Intensifying screens should be handled with care and wet finger marks of any chemicals
+  should not touch the screens.
+ 6. The Developer and the Fixer solutions should always be covered and preferably new solutions to
+  be prepared after every 2Months or after developing 250 Films whichever is earlier.
+ 7. The Temperature of Developer and Fixer to be maintained between 25 to 30 Degrees.
+         8. Solutions should be stirred with wooden stick each time films are dipped. Separate wooden
+  sticks, each for developer and fixer should be used.
+
+X-Ray Film Processing:
+
+  1. Open the exposed cassette in the Dark Room.
+ 2. Take out the exposed film and fix it in the hanger of suitable size.
+  3. Dip the film in the Developer. After about 15 seconds take out the film from the Developer to
+      visually observe the Developing status. Dip it again and take out to monitor the development as
+  frequently as possible.
+4.Take out the film from the Developer tank after it is fully developed.
+  5. Dip the film in water to rinse all traces of developer on the film
+  6. After proper rinsing, dip the film in the fixer. Let it be dipped in fixer for 5 Minutes.
+7.Dip the film in running water to rinse and remove all the fixer from the film.
+  8. Dry the film either in open place or in film drier.
+
+--- [TEXT CHUNK 39] ---
+Radiation Monitoring & Protection
+
+ 11. RADIATION MONITORING & PROTECTION
+
+11.1 Personnel Monitoring
+      Personnel monitoring is the evaluation of radiation doses received by the personnel
+working with radiation.
+The most commonly used personnel monitoring device is the film badge, which consists
+ of a personnel-monitoring film (PM Film) kept in cassette containing a set of filters. With
+ film badge, a wide range of doses from 10 mRem to 1000 Rem of different types of
+ radiation cab be evaluated. The film serves as a permanent record and if worn on chest,
+ gives the most representative value of whole body dose under normal working
+conditions.
+ The radiation dose received by radiation worker can also be determined by the use of
+ Thermoluminescent dosimeter (TLD) badge. This consists of three CaSO4: Dy TLD
+ discs embedded in a metallic framework and enclosed in a multi filter cassette. The TLD
+ badge can be used to monitor Beta, Gamma and X-Ray radiations. The TLD badge can
+ cover a wide range of doses from 10 mRem to 1000 Rem.
+In addition to PM Film & TLD Badge, radiation dose to personnel can also be assessed
+ by pocket dosimeters. Pocket dosimeters are very useful in certain operations, where the
+radiation levels vary considerable and may be quite hazardous. They give on the spot
+ check of radiation doses.
+ It is always advisable that personnel handling the X-Ray machine should use TLD
+ badges, PM Films or other devices like Pocket Dosimeters to monitor the absorbed dose
+ within the safe limits.
+
+ 11.2 Radiation Protection Accessories
+
+It is advisable to all personnel handling X-Ray machines to use following radiation
+ protection accessories:
+
+  Lead Goggles
+  Protective Barrier
+  Lead Apron
+  Lead Gloves
+  Thyroid Shield
+  Gonad Shield
+
+    
+                               Preventive Maintenance Procedure
+
+12. PREVENTIVE MAINTENANCE
+
+--- [TEXT CHUNK 40] ---
+Lead Goggles
+  Protective Barrier
+  Lead Apron
+  Lead Gloves
+  Thyroid Shield
+  Gonad Shield
+
+    
+                               Preventive Maintenance Procedure
+
+12. PREVENTIVE MAINTENANCE
+
+    Preventive Maintenance of any equipment is very important to keep it in proper working
+    condition through out its life span. Timely and proper Preventive Maintenance not only
+increases the life of the equipment, but it reduces the down time, hence savings on otherwise
+expensive repairs. We must therefore try to be disciplined as far as the time schedule and the
+         procedure for carrying out the P.M. is concerned. The details given below would give
+   guidelines of P.M. procedure. P.M on all the equipments must be performed every 6 months
+i.e.: twice a year.
+
+          For optimum output of the equipment we should start writing the voltage drop during
+       exposure at Average working KVP Time and mA settings. This record at the time of
+installation itself can be mentioned on the Machine History Card. The date and month of
+    Installation would help us actually know the extent of voltage drop as our experience
+  suggests that during the summer season; the voltage drop is on the higher side. During P.M
+    the Voltage drop can be checked with the reference value and is noted. Any increase in
+Voltage Drop would thus be noticed and line checked for any loose connections etc. in the
+mains switch/pole etc.
+
+Inform customer in advance about your visit preferably through a letter/ telephone and agree
+for a convenient time and date.
+
+    
+                                                      Preventive Maintenance Checkpoints
+
+   13. PREVENTIVE MAINTENANCE CHECKPOINTS
+
+ The following preventive maintenance procedure may be adopted for carrying out all P.M.
+   on the X-Ray Equipments.
+
+--- [TEXT CHUNK 41] ---
+Preventive Maintenance Checkpoints
+
+   13. PREVENTIVE MAINTENANCE CHECKPOINTS
+
+ The following preventive maintenance procedure may be adopted for carrying out all P.M.
+   on the X-Ray Equipments.
+
+  A) GENERAL:
+   Whenever visiting for any Preventive Maintenance, please ensure to carry all the Tools.
+   Meters, Grease, Lubricants, Machine History Card and consumables like the dusters, polish
+  etc. Please make sure that your Multimeter is calibrated with a Standard Meter lying in your
+ Branch Office.
+        1. On reaching the Customer's site enquire from Operator/Doctor for any specific
+         problems they are facing with the equipment.
+
+        2. Rectify first the problems as indicated by the customer and then proceed as under for
+         carrying out the Preventive Maintenance
+
+ B) PREVENTIVE MAINTENANCE PROCEDURE (ELECTRICAL)
+
+--- [TEXT CHUNK 42] ---
+2. Rectify first the problems as indicated by the customer and then proceed as under for
+         carrying out the Preventive Maintenance
+
+ B) PREVENTIVE MAINTENANCE PROCEDURE (ELECTRICAL)
+
+1.      Before attempting to carry out the P.M. switch ON the equipment and check the
+         working of the Machine electrically and mechanically. Observe for any flaws, which
+         should be rectified during the course of P.M.
+2.       Observe all the Electrical/Mechanical/Radiation precautions while performing the
+        P.M.
+3.       Switch OFF the Main Switch, open the cover and tighten any loose contacts/screws.
+         Also check the fuse wire Rating and it must comply with the Rating of the equipment
+         in operation.
+ 4.      Open the control panel cover. Keeping the Machine in "OFF" condition tighten all the
+         screws on the Terminal Blocks/Resistance Taps etc.
+5.       Check the rating of all the Glass Fuses and replace if necessary.
+  6.     Open cover of X-Ray / Line Contactors and check that contacts are not worn out or
+         burnt. Check the operation of the X-Ray contactor. It should not be sticky.
+ 7.      Make the Machine "ON" and check the accuracy of the Voltmeter (On Red Band
+         your Multimeter should read 230 Volts).
+8.       On "NO LOAD" check the Accuracy of Timer with the cycle counter/ stopwatch.
+9.       Giving exposure at 65-70 KVP, check the mA output of Machine at different mA
+         Stations and calibrate the mA output if required. Calibration of the mA Meter should
+         also be verified with your Multimeter. Check P1-P2 current at this time. Observe for
+         any abnormal behaviour of the Machine i.e. sparking, sounds from the Tube Head,
+         H.T. Tank, Mains Switch etc. Visually cheek the Voltage drop on your Voltmeter.
+
+    
+                                           Preventive Maintenance Checkpoints
+
+--- [TEXT CHUNK 43] ---
+Preventive Maintenance Checkpoints
+
+It should be within 10%. In case it is on the higher side, check if the wiring used in
+        the mains is of appropriate thickness. Advise the customer accordingly.
+        Also check the filament supply during the exposure. It should remain steady. If not,
+        adjust booster resistance settings.
+10.     Check the working of the Line and X-Ray contactors and clean the core and the
+        contacts of the X-Ray contactor.
+
+C) MECHANICAL
+
+    1.     Check all the movements of Tube Head, Tube Stand and Tables. Check for
+           functioning of all locks and ensure that all movements are smooth and noiseless.
+           Specially check for Vertical Carriage Up/Down Movement. Rectify wherever
+           required. Remove old grease with cloth and apply fresh grease on all movement areas
+           (wherever applicable).
+    2.     Open the Table Top and brush out all the dust settled on the Grid and on the Bucky
+           Motor Area. Clean, apply lubricant and check the Bucky play, it's lock and tighten al
+           nuts/bolts/screws in the Table.
+    3.     You must ensure that the alignment of the Center Ray of Light Beam diaphragm
+           matches with the Table center and Bucky center (Adjust if required).
+4.         Now check for Air Bubbles in Tube Head and ensure that all wires/cables on Tube
+          Head are tight. Check for bellow condition and any oil leakage. Ensure that the gap
+           between mA & G Plate is maintained at 2mm.
+
+ X-RAY /LIGHT BEAM/ ALIGNMENT
+
+1.     Check and perform X-Ray/ Light Beam Alignment
+2.     Check the LBD Bulb's mounting and orientation. Incase LBD Bulb's are fusing quite
+       often check the voltage if the voltage supply is on the higher side, reduce input
+       voltage to LBD Bulb.
+3.     Check the smooth movement of the LBD Shutters.
+
+E) CLEANING POLISHING
+
+--- [TEXT CHUNK 44] ---
+E) CLEANING POLISHING
+
+      1. Clean the machine with dry cloth and for the stubborn stains, use cleaning agent and
+       polish. Do not allow any liquids to step in the control and other Electrical Areas.
+
+    
+Preventive Maintenance Checkpoints
+
+ DARK ROOM
+Check the Dark Room and its accessories for the following:
+1.No light leakage in the Dark Room.
+2.Safe light is of proper intensity.
+3. Films used should not be beyond the expired dates.
+4Cassette locks are not loose.
+ 5. Screen Quality should be OK and no staining of the screens.
+ 6. Developer and the fixer are fresh and their temperature is maintained properly
+ 7. Wooden sticks are available for stirring of the Developer and fixer.
+ 8. Radiographer/Operator is trained to handle Dark Room Accessories.
+
+ GENERAL
+
+1. Enquire if radiographer/Operator needs any training for use of equipment & impart if
+necessary.
+2. Handover Equipment to customer.
+3. Explain/show equipment to customer, apprise him of jobs undertaken
+4. Fill Machine History Cards and get the card/report signed from customer.
+5. Inform tentative date of next Preventive Maintenance.
+
+=========================================
+--- ALL TABLE CHUNKS ---
+
+--- [TABLE CHUNK 1] ---
+### Data Table - Source: Page 8
+| ALLENGERS-100 (APR LCD) | 100mA, Full Wave Rectified X-Ray Generator with Stationary Anode X-Ray Tube and LCD Display<br/>**Anatomical Programmed Radiography (APR):** For quick and fine selection of radiographic parameters for optimum image quality. |
+|---|---|
+| OUTPUT | 8.0 KW |
+| mA STATIONS | 100 mA, 50 mA and 25 mA |
+| KVP RANGE | 40 to 100KVP in Steps of 1 KVP/Step. |
+| TIMER | Controller based electronic timer having range from 0.01 to 8.0 sec in 21 steps. |
+| CONTROL | * **Anatomical Programmed Radiography** helps the operator in such a way that by just selecting the Patient Size and Body Part to be X-Rayed the KVP and mAs are automatically selected * Attractive and Ergonomically designed feather Touch Panel **control panel having LCD display** which displays the parameters like mA, mAs, KVP, Screen type, Bucky selection, selected body part description. * Laminated Membrane switches are provided for mA Selection, KVP Selection, mAs selection, Ready, X-Ray S/W, Bucky Selection S/W and M/C ON-OFF S/Ws. * Provided with a voltage compensator switch for adjusting the I/P voltage of machine to 230V. Adjustment can be made in the range 190V to 260V & for this a Digital voltmeter is provided to display the input voltage. * A Booster X-mer is provided to stabilize and maintain the filament voltage. * A hand S/W with five meter length retractable cord is provided for operating the equipment from distance position. |
+| OVERLOAD PROTECTION & SAFETY FEATURES | * Automatic trip off overload Circuit Breaker * Ready & X-Ray indicators * Fuses for all circuits are provided in the machine * Electronic overload system does not allow Machine to select parameters which are out of range according to X-ray tube rating chart |
+| TUBE HEAD | Self-contained Tube Head containing Stationary Anode X-Ray Tube, Compact Heavy Duty Full Wave Rectified H.T. Transformer and High Voltage Silicon Rectifiers etc. all oil immersed and hermetically sealed. Tube head can be tilted 360 Degree with full flexibility for use in operation theatres and in ward for bed-side radiography. A multi-leaf collimator is provided |
+| POWER REQUIREMENT | 230 Volts, Single Phase, AC supply. Max. Allowable Line Regulation ± 10%. (with line resistance less than 0.4 ohm.) |
+
+--- [TABLE CHUNK 2] ---
+### Data Table - Source: Page 12
+| Fuse No. | Function | Rating | Location |
+|---|---|---|---|
+| F1 | Line Fuse | 25 Amps. | On Rear of Control Panel |
+| F2 | Filament Supply | 4 Amps. | On Rear of Control Panel |
+| F3 | Motherboard Card | 2 Amps. | On Rear of Control Panel |
+| F4 | Light Beam Diaphragm (Collimator) Fuse | 4 Amps. | On Rear of Control Panel |
+
+--- [TABLE CHUNK 3] ---
+### Data Table - Source: Page 35
+| mA | KVP | mAs |
+|---|---|---|
+| 50 | 100 | 115 mAs |
+| 100 | 80 | 15 mAs. |
+| 100 | 60 | 85 mAs |
+
+--- [TABLE CHUNK 4] ---
+### Data Table - Source: Page 36
+| S. No. | mA Station | KVP | mAs | P1-P2 Current |
+|---|---|---|---|---|
+| 1 | 25 | 100 | 25 | 8.0 Amps. |
+| 2 | 50 | 86 | 50 | 17.0 Amps. |
+| 3 | 100 | 56 | 100 | 33.0 Amps. |
+
+--- [TABLE CHUNK 5] ---
+### Data Table - Source: Page 40
+| S. No. | Fault Symptoms | Remedial Action |
+|---|---|---|
+| 1 | Machine does not get 'ON' | Check the single-phase input supply at the mains switch/socket. Check F1 Fuse of 25 Amps. It may be blown. Replace the fuse if it is blown. Check the input supply at Terminal TS1-12 & TS1-11. It should be 230 V AC. If supply is not available at above terminals then wire may be open between mains socket to Input terminals of control. Switch OFF the machine from mains and then check the MCB, it should show continuity between its terminals during ON position. If MCB is not showing continuity then replace the MCB. Check OFF Switch. It should show continuity between its contacts. If multimeter does not show continuity then replace the switch. Check the 230 V AC at the input of ON/OFF transformer. Check the output of ON/OFF transformer at input terminals of rectifier. It should be 12-0-12 & 0-12 Volts AC. If output is not available then replace the transformer. Check the input at J1-1 & 2 of Power Supply Card it should be 12V and at J1-8 & 9 it should be 12 V AC. Check the output at J2-1 & 2 of Power supply Card it should be 12V DC & J2-8 & 9 is should be 12V DC. If output is not available then replace the Card. Check the ON/OFF Relay whether it is getting energized or not. If relay is not getting energized then relay coil may be faulty i.e. open. Replace the relay. Check the ON/OFF Relay series with Variac A contact. It should show continuity when checked with multimeter by pressing the contacts manually. If multimeter is not showing continuity then replace the Relay (Coil may be OK but contacts are faulty). Common point of Variac contact D may be open from ON/OFF relay's contact B. |
+| 2 | Fuse F1 blowing OFF (F1 is the Mains fuse of 25 Amp.) | Tube head may be faulty and drawing heavy current. P1-P2 current should draw maximum 33 Amps. When checked with Tong Tester at full load i.e. 100 mA station. This fault will only occur during exposure. mA meter may be faulty i.e. showing less mA at the time of calibrating the machine. This can only happen at 100 mA station. LINE & NEUTRAL on ON/OFF Relay may be short with each other. Contacts of ON/OFF Relay may be short inside the relay. |
+
+--- [TABLE CHUNK 6] ---
+### Data Table - Source: Page 41
+| 3 | Fuse F2 blowing OFF<br/>(F2 is Filament supply fuse of 4 Amp.) | Filament supply i.e. F1 & F2 wires may be touching with ground or short with each other. |
+|---|---|---|
+| 4 | Fuse F4 blowing OFF (F4 is LBD/Collimator fuse of 4 Amp.) | LBD supply wires may be short. Check the connector also for any shorting of wires and check the edge connector's 5 & 6 pin of Time Dealy Card. Check LBD bulb holder. It should not give continuity with ground. Check for shorting of LBD supply wires with grounding due to cracks or cuts. |
+| 5 | Exposure starts when Ready is pressed | Check X-Ray switch on the Control Panel or in hand switch. It may be short. Check Exposure SSR relay contacts particularly Exposure Relay-A contact with multimeter. It may be short. |
+| 6 | Machine not exposing on any mA station | (i) Check filament supply between TS1-1 (F1) & TS1-2 (F2). It should be approximately 150 V AC and on pressing ready switch voltage should boost by 50 ± 10 volts. If filament supply is not available at above terminals then: a) Fuse F2 may be blown. b) Common band of filament resistance of 750 Ohms may be dry soldered or open. c) Check common wires of Relay Card at J2-7, 1 & 2 for proper connection d) Check the output at TS2-5 & 6 of CVT Transformer, it should be 230V AC. (ii) If filament supply is available at Terminal strips TS1-1 w.r.t TS1-2 then check filaments physically for glowing in the tube. At 25 mA, 50 mA and 100 mA stations, filament should glow. (iii) If filament is not glowing then: (a) Check filament voltage between F1 & F2 at terminals on Tube Head. If supply is available at above terminals then follow next step otherwise check wiring between Control and Tube Head. F1 or F2 wire may be broken. (b) Either Filament transformer may be faulty inside tube head or Filament may be open inside tube. Replace the tube head. |
+
+--- [TABLE CHUNK 7] ---
+### Data Table - Source: Page 42
+| Check P1-P2 voltage during exposure at terminals TS1-6 & TS1-5.If P1-P2 voltage is not available then:(i) Check that whether P2 wire is connected properly at contact A of Variac.(ii) Check Exposure coil supply at its terminals. It should be 15 V DC. If supply is available then check whether Exposure Relay is getting energized or not. If it is not energized then replace Exposure Relay. Also check Exposure Relay-A contacts, whether they are working or not.(iii) Check the Exposure Relay on Relay Board.(iv) If Exposure Relay's contacts are working properly and P1-P2 voltage is not coming then, check common point of Variac Contact E. It may be disconnected.If P1-P2 is available at Tube Head and exposure is not taking place, then replace the tube head, as H.V. Transformer or Rectifier diode may be faulty inside tube head. |
+|---|
+| 7 |
+| Tube head may be defective. Some connection in Tube head may be short from inside. |
+| mA meter may be defective. To check this, make exposure at 55 KVP & 50 mA. Measure P1-P2 current. It should be around 17 Amperes. If current is around 17 Amps on tong tester then mA meter is defective. |
+| 8 |
+| mA meter may have error. |
+| Tube head may be drawing high current. |
+| MCB may be defective. Check if MCB is tripping under normal conditions also. |
+| 9 |
+| 10 |
+| 11 |
+| Tube may be faulty. |
+| mA meter may be defective. |
+
+--- [TABLE CHUNK 8] ---
+### Data Table - Source: Page 43
+| 12 | Exposure taking place but mA meter does not show any deflection | Check for spark gap of mA & GND. Terminals may short through mA & GND strips. There should be approx 1mm Gap between mA & GND strips. |
+|---|---|---|
+| mA meter may be defective. |  |  |
+| 13 | Exposure does not terminating at all on all mA stations | Check the micro controller at Pin No. 15, the supply should be 0V when exposure. |
+| If common point of Wirings dry solder, solder it properly. |  |  |
+| Servo Final Card may be defective. |  |  |
+| 14 | LBD Bulb not glowing | Check fuse F4. It may be blown |
+| Check LBD supply at LBD connector. It should be 24 V AC. If it is not coming then wires from control to LBD may be broken. |  |  |
+| Check the ON-OFF toggle switch provided on LBD. It may be open. |  |  |
+| Check the LBD Bulb. It may be fuse. |  |  |
+| Check the contacts of LBD bulb with the bulb holder. Remove the carbon deposited on contacts with the help of sand paper. |  |  |
+| 15 | Centering of light & X-Ray beam is not proper | For centering of light & X-Ray beam the position of LBD bulb should be horizontal. |
+| Shift the light beam towards X-axis with two screws provided on LBD (If required). |  |  |
+| Shift the light beam towards Y-axis by adjusting it with the help of LBD bulb itself (If required). |  |  |
+| Always use the LBD bulb with tilted filament not with straight filament to get the sharp and clear edges. |  |  |
+| Adjust the cross with centre by loosening the four screws provided on LBD brackets and moving the Glass in desired direction. |  |  |
+| 16 | X-Ray quality is not proper | Check the dark room conditions, i.e. there should not be light leakage in dark room. |
+| Check the developer and fixer solution quality. |  |  |
+| If calibration is not proper, then also the image quality will be poor. |  |  |
+| If there is major spot on the anode side of X-ray tube. |  |  |
+| Films used should not be foggy and the intensifying screens in cassettes should be clean. |  |  |
+| 17 | Machine is not getting OFF | Check if OFF Switch is permanently short. |
+| If ON/OFF relay 'C' contact is sticky then machine will remain OFF only when we press off switch and becomes ON again when we release off switch. |  |  |
+| If ON switch is directly short. |  |  |
+| 18 | Electric Shock on Touching Machine | Improper ground may lead to this condition. |
+| Any live wire may be touching the body of machine. |  |  |
+| Check all the wires going to tube head, bucky for any cut on insulation. & Routing of these wires through the sharp edges. |  |  |
+
