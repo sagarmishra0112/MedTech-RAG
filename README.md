@@ -1,4 +1,4 @@
-# 🏥 X-Ray Manual RAG Assistant
+# 🏥 X-Ray Manual RAG Assistant (MedTech RAG)
 
 A full-stack Retrieval-Augmented Generation (RAG) system built on a real-world scanned medical equipment manual (Allengers X-Ray Generator). The pipeline runs from raw PDF ingestion all the way to a live conversational chat interface.
 
@@ -8,23 +8,23 @@ A full-stack Retrieval-Augmented Generation (RAG) system built on a real-world s
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│              Streamlit Chat UI  (port 8501)              │
+│              Streamlit Chat UI  (port 8501)             │
 └─────────────────────┬───────────────────────────────────┘
                       │ HTTP POST /query
 ┌─────────────────────▼───────────────────────────────────┐
-│              FastAPI Backend  (port 8000)                │
-│                src/api.py — Orchestration Layer          │
+│              FastAPI Backend  (port 8000)               │
+│                src/api.py — Orchestration Layer         │
 └──────────┬──────────────────────────┬───────────────────┘
            │                          │
 ┌──────────▼──────────┐  ┌────────────▼──────────────────┐
-│   Vector Retrieval  │  │       LLM Generation           │
-│   src/embedding.py  │  │       src/llm.py               │
-│   ChromaDB (local)  │  │   OpenAI · Anthropic · Gemini  │
-│   HuggingFace Emb.  │  │   (Factory Pattern)            │
-└─────────────────────┘  └────────────────────────────────┘
+│   Vector Retrieval  │  │       LLM Generation          │
+│   src/embedding.py  │  │       src/llm.py              │
+│   ChromaDB (local)  │  │   OpenAI · Anthropic · Gemini │
+│   HuggingFace Emb.  │  │   (Factory Pattern)           │
+└─────────────────────┘  └───────────────────────────────┘
            ▲
 ┌──────────┴─────────────────────────────────────────────┐
-│             Offline Data Pipeline (runs once)           │
+│             Offline Data Pipeline (runs once)          │
 │    ingestion.py → preprocessing.py → chunking.py       │
 └────────────────────────────────────────────────────────┘
 ```
@@ -146,4 +146,4 @@ X-Ray-manual-RAG/
 
 ---
 
-*V1 Baseline — March 2026*
+*V1 Baseline — April 2026*
