@@ -4,6 +4,12 @@
 This log tracks key architectural decisions, problems encountered, and solutions implemented. 
 It serves as a high-level record of the project's evolution, separate from detailed code learning notes.
 
+## 2026-05-29: V2 Phase 0.5 - Heuristic Noise Filtering
+**Problem:** Garbage OCR and diagram noise (e.g., spatial layout artifacts) were polluting the vector space.
+- **Decision:** Instead of a manual exclusion list for every single diagram page, implemented a simple heuristic filter in `preprocessing.py`.
+- **Action:** Split the text into blocks and calculated the ratio of alphabetical characters to total characters. Blocks with `ratio < 0.4` and `length > 20` are classified as noise and discarded.
+- **Result:** Automatically cleans up wiring diagrams, spatial lists, and random numbers without needing human-in-the-loop review for this personal project scale.
+
 ## 2026-02-21: Architecture Decision - Contextual Table Retrieval (V1 vs V2)
 **Observation:** Markdown tables lack surrounding context. E.g., The Page 35 table contains calibration data (mA, KVP), but lacks the word "calibrate". A simple vector search for "How to calibrate" will likely fail to retrieve this table.
 - **Decision:** For **V1**, we rely on the flattened table data residing inside `clean_text.txt` (which contains surrounding semantic context) as a fallback mechanism. We plan to solve that in V2 (Advanced RAG techniques)
@@ -18,14 +24,6 @@ It serves as a high-level record of the project's evolution, separate from detai
     3. **Markdown Conversion:** Converted structured JSON tables into `processed_tables.md`.
 - **Result:** Two clean artifacts ready for chunking.
 
-## 2026-02-19: Pipeline Structure & Cleanup
-**Problem:** Confused File Naming (`ing.py`)
-- **Reason:** File names like `ing.py` and `preprocessing.py` were inconsistent with "Ingestion Pipeline" terminology.
-- **Decision:** Rename all ingestion-related files to `ingestion.*`.
-- **Action:** 
-    - `ing.py` -> `ingestion.py`
-    - `ing.ipynb` -> `ingestion.ipynb`
-
 ## 2026-02-19: Preprocessing & Data Cleaning
 **Problem:** False Positive Table Extraction
 - **Observation:** LlamaParse identified a UI diagram on **Page 11** as a table.
@@ -35,7 +33,7 @@ It serves as a high-level record of the project's evolution, separate from detai
     1. Audited `tables.json`.
     2. Identified Page 11 as a false positive.
     3. Plan to add `if table['page'] in [11]: continue` to the processing script.
-- **Lesson:** Automated parsing of complex PDFs (medical manuals) is ~90% accurate. For a "Gold Standard" RAG dataset, a human-in-the-loop audit is necessary to remove noise.
+- **Lesson:** Automated parsing of complex PDFs (medical manuals) is ~90% accurate. For a "Gold Standard" RAG dataset, a human-in-the-loop audit is necessary.
 
 ## 2026-02-18: Initial Architecture (Ingestion Phase)
 **Problem:** Various issues during first script run (`ing.py`).
@@ -65,7 +63,7 @@ It serves as a high-level record of the project's evolution, separate from detai
 - **Lesson:** Always verify `sys.executable` or active venv before debugging import errors.
 
 ## 2026-03-09: Architecture Decision - Embedding Model and Vector Store
-**Problem:** Need to embed our generated chunks into a vector space and store them for retrieval. The system needs to be flexible enough for both a free local portfolio showcase and a high-performance production environment.
+**Problem:** Need to embed our generated chunks into a vector space and store them for retrieval. The system needs to be flexible enough for both a free local fallback and a high-performance production environment.
 - **Decision:** Implemented a Factory/Strategy pattern in `embedding.py` to support multiple Embedding Models (HuggingFace vs OpenAI) and Vector Stores (ChromaDB vs Pinecone). 
 - **Action:** Created `embedding.py` with feature flags (`--model`, `--store`) to allow toggling between choices via CLI arguments. Defaulting to `huggingface` + `chroma` for V1.
 - **Rejected Alternatives:** 
@@ -115,11 +113,10 @@ It serves as a high-level record of the project's evolution, separate from detai
 
 3. **`top_k=3` Too Restrictive:** Only the top 3 chunks are retrieved. If the correct chunk scores 4th or 5th in cosine similarity (which easily happens with a weak model), the LLM never sees the relevant data and correctly reports it cannot answer.
 
-4. **No Query Rewriting / Expansion:** The raw user query goes directly into ChromaDB as-is. A single phrasing of a question may not match any stored chunk. Enterprise systems rewrite the query into multiple search-friendly variants before retrieval, dramatically improving recall.
+4. **No Query Rewriting / Expansion:** The raw user query goes directly into ChromaDB as-is. A single phrasing of a question may not match any stored chunk. In later versions we will implement query rewriting to rewrite the query into multiple search-friendly variants before retrieval, dramatically improving recall.
 
-5. **Pure Semantic Search (No Keyword Fallback):** Exact numbers (`80`, `50 mA`) are not guaranteed to score high in semantic search. Hybrid search (semantic + BM25 keyword) ensures exact numerical matches are always captured even when semantic similarity fails.
+5. **Pure Semantic Search (No Keyword Fallback):** Exact numbers (`80`, `50 mA`) are not guaranteed to score high in semantic search. To overcome this we will implement Hybrid search (semantic + BM25 keyword) to ensure that exact numerical matches are always captured even when semantic similarity fails.
 
-**V1 Verdict:** Acceptable for a portfolio prototype that demonstrates the full end-to-end RAG pipeline. The failure mode is well-understood and fully documented.
 
 **V2 Roadmap — Planned Improvements:**
 

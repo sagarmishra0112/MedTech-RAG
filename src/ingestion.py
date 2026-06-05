@@ -14,7 +14,7 @@ from llama_index.core.node_parser import MarkdownNodeParser
 # pip install llama_cloud>=1.0
 # pip install --upgrade llama-cloud
 
-load_dotenv(override=True)
+load_dotenv(override=True)  
 api_key = os.getenv("llamacloud_key")
 
 # Output directories (relative to this script's location)

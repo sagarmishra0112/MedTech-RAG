@@ -1,4 +1,6 @@
 import os
+import shutil
+import hashlib
 import argparse
 from dotenv import load_dotenv
 
@@ -52,9 +54,25 @@ def get_vector_store(store_choice, embeddings_model):
     else:
         raise ValueError(f"Unknown vector store: {store_choice}")
 
+def _generate_doc_id(content: str, source: str, index: int) -> str:
+    """
+    Generate a deterministic document ID from content hash.
+    This prevents duplicate documents from being inserted into ChromaDB
+    when the embedding pipeline is re-run. ChromaDB will upsert (update)
+    instead of insert if the ID already exists.
+    """
+    hash_input = f"{source}:{index}:{content}"
+    return hashlib.sha256(hash_input.encode("utf-8")).hexdigest()[:16]
+
 def main(args):
     print("🚀 Starting Embedding & Vector Storage Pipeline...")
     load_dotenv() # Load API keys from .env if needed
+    
+    # --- V2 FIX: Reset ChromaDB if --reset flag is passed ---
+    if args.reset and os.path.exists(DB_DIR):
+        print("🗑️  --reset flag detected. Wiping existing ChromaDB...")
+        shutil.rmtree(DB_DIR)
+        print("✅ Old database deleted.")
     
     # 1. Get the data pieces using our previous module
     print("\n--- 1. Fetching Chunks ---")
@@ -64,31 +82,31 @@ def main(args):
     # LangChain databases expect "Document" objects, not raw strings
     # So we wrap our strings and add some helpful metadata
     documents = []
+    doc_ids = []
     
     for i, t in enumerate(text_chunks):
         doc = Document(page_content=t, metadata={"source": "unstructured_text", "chunk_index": i})
         documents.append(doc)
+        doc_ids.append(_generate_doc_id(t, "unstructured_text", i))
         
     for i, t in enumerate(table_chunks):
         doc = Document(page_content=t, metadata={"source": "markdown_table", "chunk_index": i})
         documents.append(doc)
+        doc_ids.append(_generate_doc_id(t, "markdown_table", i))
         
     print(f"✅ Packaged {len(documents)} total chunks into Document objects.")
+    print(f"   (Each document has a deterministic ID to prevent duplicates)")
     
     # 2. Initialize Models and Storage based on User Choice
     print(f"\n--- 2. Connecting to External Services ---")
     embeddings = get_embedding_model(args.model)
     vector_store = get_vector_store(args.store, embeddings)
     
-    # 3. Embed and Store
+    # 3. Embed and Store (using IDs to prevent duplicates)
     print(f"\n--- 3. Pushing to Vector Database ---")
     print("Working... (If using local HF, this might take a moment to compute embeddings)")
-    
-    # Reset/clear previous db (optional, good for dev)
-    if args.store == "chroma" and os.path.exists(DB_DIR):
-        print("⚠️  Warning: Appending to existing Chroma database.")
         
-    vector_store.add_documents(documents)
+    vector_store.add_documents(documents, ids=doc_ids)
     print("✅ All documents successfully embedded and stored!")
     print(f"🎯 Ready for Contextual Retrieval.")
 
@@ -107,6 +125,12 @@ if __name__ == "__main__":
         choices=["chroma", "pinecone"], 
         default="chroma",
         help="Where to save the vectors."
+    )
+    parser.add_argument(
+        "--reset",
+        action="store_true",
+        default=False,
+        help="Wipe the existing vector database before re-embedding. Use this for clean V2 rebuilds."
     )
     
     args = parser.parse_args()

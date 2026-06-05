@@ -1,6 +1,6 @@
 import os
 import re
-from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain_text_splitters import MarkdownHeaderTextSplitter
 
 # Paths
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -23,13 +23,14 @@ def chunk_text():
         text = f.read()
 
     # Create the text splitter
-    # We use a chunk size of 2000 characters (~500 tokens) to capture full paragraphs
-    # We use 300 characters (~75 tokens) of overlap to prevent breaking sentences in half
-    text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=2000,
-        chunk_overlap=300,
-        length_function=len,
-        separators=["\n\n", "\n", " ", ""] # Prioritize splitting at paragraphs
+    headers = [
+    ("#", "Header 1"),
+    ("##", "Header 2"),
+    ("###", "Header 3")
+    ]
+
+    text_splitter = MarkdownHeaderTextSplitter(
+    headers_to_split_on = headers
     )
 
     chunks = text_splitter.split_text(text)
@@ -80,7 +81,7 @@ def main():
         f.write("--- ALL TEXT CHUNKS ---\n\n")
         for i, chunk in enumerate(text_chunks):
             f.write(f"--- [TEXT CHUNK {i+1}] ---\n")
-            f.write(chunk)
+            f.write(chunk.page_content)
             f.write("\n\n")
             
         f.write("=========================================\n")

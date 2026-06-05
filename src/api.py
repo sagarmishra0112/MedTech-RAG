@@ -29,15 +29,15 @@ async def lifespan(app: FastAPI):
         llm = None
         
     print("✅ System loaded and ready!")
-    yield # Server runs here
+    yield # Server runs here 
     print("🛑 Shutting down server...")
 
 # 1. Create the 'app' instance, using the lifespan
-app = FastAPI(title="FinanceRAG API", lifespan=lifespan)
+app = FastAPI(title="MedTech RAG API", lifespan=lifespan)
 
 @app.get("/")
 def home():
-    return {"message": "FinanceRAG is alive!"}
+    return {"message": "MedTech RAG is alive!"}
 
 @app.get("/status")
 def get_status():

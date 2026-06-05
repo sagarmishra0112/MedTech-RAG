@@ -62,6 +62,7 @@ def generate_answer(llm, question: str, context: str) -> str:
         HumanMessage(content=question)
     ]
     
-    # Generate the response
+    # Generate the response  
     response = llm.invoke(messages)
     return response.content
+    

@@ -46,6 +46,28 @@ def clean_text(text):
         text_parts = text.split(split_keyword, 1)
         # Re-attach the keyword so we don't lose the section header!
         text = split_keyword + text_parts[1]
+        
+    # 4. Heuristic Noise Filtering (Phase 0.5)
+    print("Applying heuristic noise filtering to text blocks...")
+    blocks = text.split('\n\n')
+    clean_blocks = []
+    for block in blocks:
+        if not block.strip():
+            continue
+            
+        alpha_chars = len(re.findall(r'[a-zA-Z]', block))
+        total_chars = len(block.strip())
+        
+        # Only apply to blocks with decent length to avoid dropping small valid text
+        if total_chars > 20: 
+            ratio = alpha_chars / total_chars
+            if ratio < 0.4:
+                print(f" ⏭️ Discarding noisy block (ratio {ratio:.2f}): {repr(block[:60])}...")
+                continue
+                
+        clean_blocks.append(block)
+        
+    text = '\n\n'.join(clean_blocks)
     
     return text.strip()
 
@@ -80,7 +102,7 @@ def forward_fill_page_12(rows):
                 last_location = clean_cells[3]
             elif len(clean_cells) == 3 and last_location:
                 # F2 row is missing the 4th element: ['F2', 'Filament Supply', '4 Amps.']
-                # Forward fill the location!
+                # Forward fill the location
                 clean_cells.append(last_location)
         
         cleaned_rows.append(clean_cells)

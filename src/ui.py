@@ -2,11 +2,11 @@ import streamlit as st
 import requests
 
 # Set page config for a cleaner look
-st.set_page_config(page_title="FinanceRAG", page_icon="📈", layout="centered")
+st.set_page_config(page_title="MedTech RAG", page_icon="🏥", layout="centered")
 
 # Custom UI Styling
-st.title("📈 FinanceRAG Assistant")
-st.markdown("Ask questions about your enterprise documents. The AI retrieves exact chunks and tables.")
+st.title("🏥 MedTech RAG: X-Ray Assistant")
+st.markdown("Ask technical questions about X-ray documentation. The AI retrieves exact diagnostic chunks and tables.")
 
 # Initialize chat history in Streamlit session state
 if "messages" not in st.session_state:
