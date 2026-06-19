@@ -20,7 +20,21 @@ def load_data():
         tables = json.load(f)
     return text, tables
  
-def clean_text(text):
+def process_row(row_str):
+    """Helper to convert the stringified list representation back to a normal list.
+    Example: "['F1', 'Line Fuse']" -> ['F1', 'Line Fuse']
+    """
+    if isinstance(row_str, list):
+        return [str(c) if c is not None else "" for c in row_str]
+        
+    try:
+        # Safely convert string representation of list back to list
+        import ast
+        return ast.literal_eval(row_str)
+    except:
+        return []
+
+def clean_text(text, tables_data):
     print("Cleaning unstructured text...")
     
     # 1. Remove known headers and footers using Regex
@@ -47,8 +61,20 @@ def clean_text(text):
         # Re-attach the keyword so we don't lose the section header!
         text = split_keyword + text_parts[1]
         
-    # 4. Heuristic Noise Filtering (Phase 0.5)
-    print("Applying heuristic noise filtering to text blocks...")
+    # Extract table strings for filtering
+    table_strings = set()
+    for table in tables_data:
+        if table.get("page", 0) in EXCLUDE_PAGES:
+            continue
+        for row in table.get("rows", []):
+            cells = process_row(row)
+            for cell in cells:
+                clean_cell = str(cell).strip().replace("\n", " ").replace("<br/>", " ")
+                if len(clean_cell) > 5:
+                    table_strings.add(clean_cell)
+        
+    # 4. Heuristic Noise & Table Filtering (Phase 0.5)
+    print("Applying heuristic noise & table filtering to text blocks...")
     blocks = text.split('\n\n')
     clean_blocks = []
     for block in blocks:
@@ -58,32 +84,33 @@ def clean_text(text):
         alpha_chars = len(re.findall(r'[a-zA-Z]', block))
         total_chars = len(block.strip())
         
-        # Only apply to blocks with decent length to avoid dropping small valid text
+        # Noise filtering (diagrams)
         if total_chars > 20: 
             ratio = alpha_chars / total_chars
-            if ratio < 0.4:
+            lines = block.strip().split('\n')
+            avg_line_len = sum(len(l.strip()) for l in lines) / len(lines) if lines else 0
+            
+            # Stricter heuristic: diagrams often have many short lines and low alphabetical ratio
+            if ratio < 0.5 or (ratio < 0.65 and avg_line_len < 15):
                 print(f" ⏭️ Discarding noisy block (ratio {ratio:.2f}): {repr(block[:60])}...")
                 continue
+        
+        # Table filtering (remove duplicated tables from text)
+        table_hits = 0
+        clean_block_text = block.replace('\n', ' ')
+        for ts in table_strings:
+            if ts in clean_block_text:
+                table_hits += 1
+                
+        if table_hits >= 3:
+            print(f" ⏭️ Discarding table block from text: {repr(block[:60])}...")
+            continue
                 
         clean_blocks.append(block)
         
     text = '\n\n'.join(clean_blocks)
     
     return text.strip()
-
-def process_row(row_str):
-    """Helper to convert the stringified list representation back to a normal list.
-    Example: "['F1', 'Line Fuse']" -> ['F1', 'Line Fuse']
-    """
-    if isinstance(row_str, list):
-        return [str(c) if c is not None else "" for c in row_str]
-        
-    try:
-        # Safely convert string representation of list back to list
-        import ast
-        return ast.literal_eval(row_str)
-    except:
-        return []
 
 def forward_fill_page_12(rows): 
     """Specific V1 fix for Page 12 Fuses Table"""
@@ -182,7 +209,7 @@ def main():
     text, tables = load_data()
     
     # Execute Pipeline
-    clean_txt = clean_text(text)
+    clean_txt = clean_text(text, tables)
     processed_md = process_tables(tables)
     
     # Save structured outputs
