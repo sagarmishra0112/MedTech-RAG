@@ -1,5 +1,10 @@
 # 🏥 X-Ray Manual RAG Assistant (MedTech RAG)
 
+## 🚀 V2 Development in Progress
+Active development on hybrid search, chunking strategies, and enterprise resilience patterns.  
+See the [`feature/phase-0.5-markdown-recursive-chunking`](https://github.com/sagarmishra0112/MedTech-RAG/tree/feature/phase-0.5-markdown-recursive-chunking)
+
+
 A full-stack Retrieval-Augmented Generation (RAG) system built on a real-world scanned medical equipment manual (Allengers X-Ray Generator). The pipeline runs from raw PDF ingestion all the way to a live conversational chat interface.
 
 ---
