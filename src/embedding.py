@@ -84,13 +84,25 @@ def main(args):
     documents = []
     doc_ids = []
     
+    import re
+
     for i, t in enumerate(text_chunks):
-        doc = Document(page_content=t, metadata={"source": "unstructured_text", "chunk_index": i})
+        # t is a Document object. Extract its page_content and merge its metadata.
+        merged_metadata = {**t.metadata, "source": "unstructured_text", "chunk_index": i}
+        doc = Document(page_content=t.page_content, metadata=merged_metadata)
         documents.append(doc)
-        doc_ids.append(_generate_doc_id(t, "unstructured_text", i))
+        doc_ids.append(_generate_doc_id(t.page_content, "unstructured_text", i))
         
     for i, t in enumerate(table_chunks):
-        doc = Document(page_content=t, metadata={"source": "markdown_table", "chunk_index": i})
+        # t is a raw markdown string. Extract approximate page number from header text.
+        page_match = re.search(r"Source: Page (\d+)", t)
+        page_num = int(page_match.group(1)) if page_match else None
+        
+        metadata = {"source": "markdown_table", "chunk_index": i}
+        if page_num is not None:
+            metadata["page"] = page_num
+            
+        doc = Document(page_content=t, metadata=metadata)
         documents.append(doc)
         doc_ids.append(_generate_doc_id(t, "markdown_table", i))
         

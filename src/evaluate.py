@@ -37,7 +37,8 @@ def main():
     
     # 2. Load the RAG System (Vector Store & LLM)
     print("Loading RAG Components...")
-    embeddings = get_embedding_model("huggingface")
+    embedding_choice = os.getenv("EMBEDDING_MODEL", "huggingface")
+    embeddings = get_embedding_model(embedding_choice)
     vector_store = get_vector_store("chroma", embeddings)
     
     try:

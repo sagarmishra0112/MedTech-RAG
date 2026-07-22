@@ -1,11 +1,11 @@
 import os
 import re
-from langchain_text_splitters import MarkdownHeaderTextSplitter
+from langchain_text_splitters import MarkdownHeaderTextSplitter, RecursiveCharacterTextSplitter
 
 # Paths
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(SCRIPT_DIR, "..", "data", "parsed_output")
-CLEAN_TEXT_PATH = os.path.join(DATA_DIR, "clean_text.txt")
+CLEAN_MD_PATH = os.path.join(DATA_DIR, "clean_markdown.md")
 PROCESSED_TABLES_PATH = os.path.join(DATA_DIR, "processed_tables.md")
 CHUNKS_DIR = os.path.join(DATA_DIR, "chunks")
 
@@ -15,11 +15,11 @@ def ensure_dirs():
 
 def chunk_text():
     print("Chunking unstructured text...")
-    if not os.path.exists(CLEAN_TEXT_PATH):
-        print(f"❌ Error: Could not find {CLEAN_TEXT_PATH}")
+    if not os.path.exists(CLEAN_MD_PATH):
+        print(f"❌ Error: Could not find {CLEAN_MD_PATH}")
         return []
 
-    with open(CLEAN_TEXT_PATH, "r", encoding="utf-8") as f:
+    with open(CLEAN_MD_PATH, "r", encoding="utf-8") as f:
         text = f.read()
 
     # Create the text splitter
@@ -29,13 +29,24 @@ def chunk_text():
     ("###", "Header 3")
     ]
 
-    text_splitter = MarkdownHeaderTextSplitter(
+    text_splitter1 = MarkdownHeaderTextSplitter(
     headers_to_split_on = headers
     )
 
-    chunks = text_splitter.split_text(text)
-    print(f"✅ Generated {len(chunks)} text chunks.")
-    return chunks
+    text_splitter2 = RecursiveCharacterTextSplitter(
+    # Set a really small chunk size, just to show.
+    chunk_size=1000,
+    chunk_overlap=200,
+    length_function=len,
+    is_separator_regex=False,
+)
+
+    chunks = text_splitter1.split_text(text)
+    final_chunks = text_splitter2.split_documents(chunks)
+
+    print(f"✅ Generated {len(final_chunks)} text chunks.")
+    print(final_chunks[2 ])
+    return final_chunks
 
 def chunk_tables():
     print("Chunking markdown tables...")
@@ -63,7 +74,7 @@ def chunk_tables():
     return table_chunks
 
 def main(): 
-    print("🚀 Starting Semantic Chunking Pipeline...")
+    print("Starting Semantic Chunking Pipeline...")
     ensure_dirs()
     
     text_chunks = chunk_text()

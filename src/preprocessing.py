@@ -5,16 +5,16 @@ import re
 # Paths
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(SCRIPT_DIR, "..", "data", "parsed_output")    
-FULLTEXT_PATH = os.path.join(DATA_DIR, "fulltext.txt")
+INPUT_MD_PATH = os.path.join(DATA_DIR, "full_markdown.md")
 TABLES_PATH = os.path.join(DATA_DIR, "tables.json")
-CLEAN_TEXT_PATH = os.path.join(DATA_DIR, "clean_text.txt")
+CLEAN_MD_PATH = os.path.join(DATA_DIR, "clean_markdown.md")
 PROCESSED_TABLES_PATH = os.path.join(DATA_DIR, "processed_tables.md")
 
 # V1 Rules
 EXCLUDE_PAGES = {11, 32} # 11 is a UI diagram, 32 has circuit schematic labels
 
 def load_data():
-    with open(FULLTEXT_PATH, "r", encoding="utf-8") as f:
+    with open(INPUT_MD_PATH, "r", encoding="utf-8") as f:
         text = f.read()
     with open(TABLES_PATH, "r", encoding="utf-8") as f:
         tables = json.load(f)
@@ -37,6 +37,9 @@ def process_row(row_str):
 def clean_text(text, tables_data):
     print("Cleaning unstructured text...")
     
+    # Strip all HTML tables to prevent text-table duplicates and remove noise
+    text = re.sub(r'<table>.*?</table>', '', text, flags=re.DOTALL)
+    
     # 1. Remove known headers and footers using Regex
     # Match phrases optionally followed by a newline
     text = re.sub(r'Allengers 100 Installation/Service Manual\n?', '', text)
@@ -53,8 +56,8 @@ def clean_text(text, tables_data):
     text = re.sub(r'\n{3,}', '\n\n', text)
     
     # 3. Crop Starting Noise (TOC, Approvals, etc)
-    # Split exactly at the text "1. SYSTEM OVERVIEW" and keep everything after
-    split_keyword = "1. SYSTEM OVERVIEW"
+    # Split exactly at the text "# 1. SYSTEM OVERVIEW" and keep everything after
+    split_keyword = "# 1. SYSTEM OVERVIEW"
     if split_keyword in text:
         # split(..., 1) splits only on the FIRST occurrence, giving us [before, after]
         text_parts = text.split(split_keyword, 1)
@@ -202,7 +205,7 @@ def process_tables(tables_data):
 def main():
     print("🚀 Starting Preprocessing V1 Pipeline...")
     
-    if not os.path.exists(FULLTEXT_PATH) or not os.path.exists(TABLES_PATH):
+    if not os.path.exists(INPUT_MD_PATH) or not os.path.exists(TABLES_PATH):
         print(f"❌ Error: Could not find ingestion output at {DATA_DIR}")
         return
         
@@ -213,9 +216,9 @@ def main():
     processed_md = process_tables(tables)
     
     # Save structured outputs
-    with open(CLEAN_TEXT_PATH, "w", encoding="utf-8") as f:
+    with open(CLEAN_MD_PATH, "w", encoding="utf-8") as f:
         f.write(clean_txt)
-    print(f"✅ Saved cleaned full text -> {os.path.basename(CLEAN_TEXT_PATH)}")
+    print(f"✅ Saved cleaned markdown text -> {os.path.basename(CLEAN_MD_PATH)}")
     
     with open(PROCESSED_TABLES_PATH, "w", encoding="utf-8") as f:
         f.write(processed_md)

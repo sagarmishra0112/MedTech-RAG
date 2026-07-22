@@ -1,8 +1,10 @@
+import os
 from fastapi import FastAPI, Depends
 from contextlib import asynccontextmanager
 from src.embedding import get_embedding_model, get_vector_store
 from src.llm import get_llm, generate_answer
 from dotenv import load_dotenv
+
 
 from src.schemas import QueryRequest, QueryResponse
 
@@ -17,7 +19,8 @@ async def lifespan(app: FastAPI):
     global vector_store, llm
     load_dotenv()
     print("🚀 Loading AI Models & ChromaDB...")
-    embeddings = get_embedding_model("huggingface")
+    embedding_choice = os.getenv("EMBEDDING_MODEL", "huggingface")
+    embeddings = get_embedding_model(embedding_choice)
     vector_store = get_vector_store("chroma", embeddings)
     
     # Try to load the LLM. 
