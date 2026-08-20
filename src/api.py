@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 
 
 from src.schemas import QueryRequest, QueryResponse
+from langsmith import traceable
 
 # Global variable to hold our database in memory
 vector_store = None
@@ -51,6 +52,7 @@ def get_status():
 
 # 2. Add the Query Endpoint
 @app.post("/query", response_model=QueryResponse)
+@traceable(name="MedTech RAG Query Endpoint")
 def query_rag(request: QueryRequest):
     # This is the Logic Layer! We use our loaded vector_store
     print(f"Searching for: {request.question}")
@@ -70,9 +72,22 @@ def query_rag(request: QueryRequest):
         print("📥 LLM Offline. Returning raw retrieved context instead.")
         final_answer = "⚠️ [Generation Model Offline - Displaying Raw Extracted Context]:\n\n" + combined_context
     
-    # Extract where each piece came from
-    sources = [doc.metadata.get("source", "Unknown") for doc in results]
-    
+    # Format human-readable source locations using chunk metadata
+    sources = []
+    for doc in results:
+        meta = doc.metadata
+        source_type = meta.get("source", "Unknown")
+        if source_type == "unstructured_text":
+            headers = [meta.get(h) for h in ["Header 1", "Header 2", "Header 3"] if meta.get(h)]
+            header_str = " > ".join(headers) if headers else "Unstructured Text"
+            page = meta.get("page")
+            sources.append(f"{header_str} (Page {page})" if page is not None else header_str)
+        elif source_type == "markdown_table":
+            page = meta.get("page")
+            sources.append(f"Table (Page {page})" if page is not None else "Table")
+        else:
+            sources.append(source_type)
+            
     # Return it! FastAPI will check this against QueryResponse to strip leaks
     return {
         "answer": final_answer,

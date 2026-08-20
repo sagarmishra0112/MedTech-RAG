@@ -1,6 +1,9 @@
 import os
 import json
 import re
+from dotenv import load_dotenv
+from src.llm import get_llm
+from langchain_core.messages import HumanMessage, SystemMessage
 
 # Paths
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -164,7 +167,34 @@ def make_markdown_table(rows):
     
     return "\n".join(md)
 
-def process_tables(tables_data):
+def get_table_summary(llm, md_table):
+    if not llm:
+        return ""
+    
+    system_prompt = (
+        "You are an expert technical documentation assistant. "
+        "Your task is to write a highly detailed, concise natural language summary of the provided Markdown table. "
+        "This summary will be used by an embedding model for semantic search. "
+        "Ensure you explain: \n"
+        "1. What configuration, settings, components, or parameters the table represents.\n"
+        "2. Key fields/columns, and a few specific rows or examples of the relationships between columns "
+        "(e.g., 'At 50 mA and 100 kVp, the correct mAs is 115').\n"
+        "3. Keep the summary under 150 words. Do not use conversational filler, just dense technical description."
+    )
+    
+    messages = [
+        SystemMessage(content=system_prompt),
+        HumanMessage(content=f"Here is the table:\n\n{md_table}")
+    ]
+    
+    try:
+        response = llm.invoke(messages)
+        return response.content.strip()
+    except Exception as e:
+        print(f"⚠️ Failed to generate summary: {e}")
+        return ""
+
+def process_tables(tables_data, llm=None):
     print(f"Processing {len(tables_data)} tables...")
     markdown_output = []
     
@@ -194,8 +224,16 @@ def process_tables(tables_data):
         # Generate clean Markdown string
         md_table = make_markdown_table(processed_rows)
         
+        # Generate summary using LLM if available
+        summary = ""
+        if llm:
+            summary = get_table_summary(llm, md_table)
+            print(f"Generated summary for Page {page}: {repr(summary[:60])}...")
+        
         # Add metadata/framing for RAG
         markdown_output.append(f"### Data Table - Source: Page {page}")
+        if summary:
+            markdown_output.append(f"SUMMARY: {summary}\n")
         markdown_output.append(md_table)
         markdown_output.append("\n")
         
@@ -203,7 +241,8 @@ def process_tables(tables_data):
 
 
 def main():
-    print("🚀 Starting Preprocessing V1 Pipeline...")
+    print("🚀 Starting Preprocessing V2 Pipeline with Table Summarization...")
+    load_dotenv()
     
     if not os.path.exists(INPUT_MD_PATH) or not os.path.exists(TABLES_PATH):
         print(f"❌ Error: Could not find ingestion output at {DATA_DIR}")
@@ -211,9 +250,16 @@ def main():
         
     text, tables = load_data()
     
+    # Initialize LLM for table summarization (Phase 1)
+    try:
+        llm = get_llm("openai")
+    except Exception as e:
+        print(f"⚠️ Could not load LLM for summarization: {e}. Summarization will be skipped.")
+        llm = None
+    
     # Execute Pipeline
     clean_txt = clean_text(text, tables)
-    processed_md = process_tables(tables)
+    processed_md = process_tables(tables, llm)
     
     # Save structured outputs
     with open(CLEAN_MD_PATH, "w", encoding="utf-8") as f:
@@ -222,7 +268,7 @@ def main():
     
     with open(PROCESSED_TABLES_PATH, "w", encoding="utf-8") as f:
         f.write(processed_md)
-    print(f"✅ Saved formatted Markdown tables -> {os.path.basename(PROCESSED_TABLES_PATH)}")
+    print(f"✅ Saved formatted Markdown tables (with summaries) -> {os.path.basename(PROCESSED_TABLES_PATH)}")
     
     print("Done! Data is ready for RAG Chunking.")
 

@@ -2,6 +2,7 @@ import os
 
 # Base classes from LangChain
 from langchain_core.messages import HumanMessage, SystemMessage
+from langsmith import traceable
 
 def get_llm(model_choice: str):
     """
@@ -44,7 +45,9 @@ def get_llm(model_choice: str):
     else:
         raise ValueError(f"Unknown LLM model: {model_choice}")
 
+@traceable(name="Generate RAG Answer")
 def generate_answer(llm, question: str, context: str) -> str:
+
     """
     Takes the retrieved context and the user's question, and asks the LLM to generate a final answer.
     """

@@ -1,6 +1,5 @@
 import os
 import shutil
-import hashlib
 import argparse
 from dotenv import load_dotenv
 
@@ -54,16 +53,6 @@ def get_vector_store(store_choice, embeddings_model):
     else:
         raise ValueError(f"Unknown vector store: {store_choice}")
 
-def _generate_doc_id(content: str, source: str, index: int) -> str:
-    """
-    Generate a deterministic document ID from content hash.
-    This prevents duplicate documents from being inserted into ChromaDB
-    when the embedding pipeline is re-run. ChromaDB will upsert (update)
-    instead of insert if the ID already exists.
-    """
-    hash_input = f"{source}:{index}:{content}"
-    return hashlib.sha256(hash_input.encode("utf-8")).hexdigest()[:16]
-
 def main(args):
     print("🚀 Starting Embedding & Vector Storage Pipeline...")
     load_dotenv() # Load API keys from .env if needed
@@ -82,7 +71,6 @@ def main(args):
     # LangChain databases expect "Document" objects, not raw strings
     # So we wrap our strings and add some helpful metadata
     documents = []
-    doc_ids = []
     
     import re
 
@@ -91,7 +79,6 @@ def main(args):
         merged_metadata = {**t.metadata, "source": "unstructured_text", "chunk_index": i}
         doc = Document(page_content=t.page_content, metadata=merged_metadata)
         documents.append(doc)
-        doc_ids.append(_generate_doc_id(t.page_content, "unstructured_text", i))
         
     for i, t in enumerate(table_chunks):
         # t is a raw markdown string. Extract approximate page number from header text.
@@ -104,21 +91,24 @@ def main(args):
             
         doc = Document(page_content=t, metadata=metadata)
         documents.append(doc)
-        doc_ids.append(_generate_doc_id(t, "markdown_table", i))
         
     print(f"✅ Packaged {len(documents)} total chunks into Document objects.")
-    print(f"   (Each document has a deterministic ID to prevent duplicates)")
     
     # 2. Initialize Models and Storage based on User Choice
     print(f"\n--- 2. Connecting to External Services ---")
     embeddings = get_embedding_model(args.model)
     vector_store = get_vector_store(args.store, embeddings)
     
-    # 3. Embed and Store (using IDs to prevent duplicates)
+    # 3. Embed and Store (using metadata deletion to clear old chunks before adding)
     print(f"\n--- 3. Pushing to Vector Database ---")
     print("Working... (If using local HF, this might take a moment to compute embeddings)")
+    
+    # Clear existing chunks matching incoming source metadata
+    sources_to_update = set(doc.metadata["source"] for doc in documents if "source" in doc.metadata)
+    for source in sources_to_update:
+        vector_store.delete(where={"source": source})
         
-    vector_store.add_documents(documents, ids=doc_ids)
+    vector_store.add_documents(documents)
     print("✅ All documents successfully embedded and stored!")
     print(f"🎯 Ready for Contextual Retrieval.")
 
