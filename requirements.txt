@@ -11,9 +11,11 @@ requests>=2.31.0
 # LLM Generation — un-comment and install only the provider you plan to use.
 # NOTE: The app can even run without any LLM key — it degrades gracefully to raw retrieval.
 langchain-core>=1.2.0
-langchain-openai>=1.1.0              # Default. Add OPENAI_API_KEY to .env to activate.
-# langchain-anthropic>=0.3.0         # Optional. Add ANTHROPIC_API_KEY to .env to activate.
-# langchain-google-genai>=2.0.0      # Optional. Add GOOGLE_API_KEY to .env to activate.
+langchain>=0.3.0                      # Required for tool definitions
+langgraph>=0.2.0                      # Required for create_react_agent (modern AgentExecutor replacement)
+langchain-openai>=1.1.0               # Default. Add OPENAI_API_KEY to .env to activate.
+# langchain-anthropic>=0.3.0          # Optional. Add ANTHROPIC_API_KEY to .env to activate.
+# langchain-google-genai>=2.0.0       # Optional. Add GOOGLE_API_KEY to .env to activate.
 
 # Embeddings & Vector Store
 langchain-huggingface>=0.1.0
@@ -35,3 +37,12 @@ transformers>=4.40.0
 # Observability & Evaluation
 langsmith>=0.1.0
 
+# ── Rented GPU / Local vLLM support ──────────────────────────────────────────
+# To use a model running on a rented GPU (RunPod, Vast.ai, Lambda Labs):
+# 1. Spin up Ollama or vLLM on the GPU instance.
+# 2. Add to your .env:
+#      LOCAL_LLM_BASE_URL=http://<gpu-ip>:8000/v1
+#      LOCAL_LLM_MODEL=llama3.1:70b          # or qwen2.5:72b, mistral-large, etc.
+#      LOCAL_LLM_API_KEY=not-needed          # vLLM doesn't require a real key by default
+# 3. In api.py lifespan, change get_llm("openai") → get_llm("local")
+# No extra packages needed — langchain-openai handles OpenAI-compatible APIs.

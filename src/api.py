@@ -2,11 +2,11 @@ import os
 from fastapi import FastAPI, Depends
 from contextlib import asynccontextmanager
 from src.embedding import get_embedding_model, get_vector_store
-from src.llm import get_llm, generate_answer
+from src.llm import get_llm, generate_answer, rewrite_query
+from src.agent import run_agent
 from dotenv import load_dotenv
 
-
-from src.schemas import QueryRequest, QueryResponse
+from src.schemas import QueryRequest, QueryResponse, AgentQueryRequest, AgentQueryResponse
 from langsmith import traceable
 
 # Global variable to hold our database in memory
@@ -58,7 +58,9 @@ def query_rag(request: QueryRequest):
     print(f"Searching for: {request.question}")
     
     # Run the actual similarity search on Chroma
-    results = vector_store.similarity_search(request.question, k=request.top_k)
+    # Phase 1: rewrite the query first for better retrieval (silently skips if no LLM)
+    search_query = rewrite_query(llm, request.question) if llm else request.question
+    results = vector_store.similarity_search(search_query, k=request.top_k)
     
     # Format the results for the user
     # Combine all matched texts into one context string
@@ -94,4 +96,41 @@ def query_rag(request: QueryRequest):
         "sources": sources
     }
 
- 
+
+# ── Phase 2: Agentic endpoint ──────────────────────────────────────────────
+
+@app.post("/agent-query", response_model=AgentQueryResponse)
+@traceable(name="MedTech Agentic RAG Endpoint")
+def agent_query_rag(request: AgentQueryRequest):
+    """
+    Agentic RAG endpoint.
+    Unlike /query (single retrieve→generate), this endpoint runs a
+    ReAct agent loop that:
+      1. Decides which tool to call (text search / table search / summary)
+      2. Inspects the results, calls more tools if needed
+      3. Synthesizes a grounded final answer
+      4. Self-grades the answer and retries if the score is too low
+
+    Response includes `steps_taken` (tool calls made) and
+    `grade` (self-critique score 1–5).
+    """
+    if not llm:
+        return AgentQueryResponse(
+            answer="⚠️ Agent is offline — no LLM loaded. Check your API key in .env.",
+            sources=[],
+            steps_taken=0,
+            grade=0,
+        )
+
+    print(f"\n🤖 Agentic query received: {request.question}")
+    result = run_agent(
+        question=request.question,
+        vector_store=vector_store,
+        llm=llm,
+    )
+    return AgentQueryResponse(
+        answer=result["answer"],
+        sources=result["sources"],
+        steps_taken=result["steps_taken"],
+        grade=result["grade"],
+    )
