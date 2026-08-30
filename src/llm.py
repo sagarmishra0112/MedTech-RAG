@@ -3,6 +3,7 @@ import os
 # Base classes from LangChain
 from langchain_core.messages import HumanMessage, SystemMessage
 from langsmith import traceable
+from langchain_core.language_models.chat_models import BaseChatModel
 
 def get_llm(model_choice: str):
     """
@@ -37,13 +38,72 @@ def get_llm(model_choice: str):
         return ChatGoogleGenerativeAI(model="gemini-1.5-flash", temperature=0)
         
     elif model_choice == "local":
-        print("🏠 Initializing Local LLM (Placeholder for Ollama/Llama.cpp)...")
-        # For a truly local pipeline, you would use ChatOllama or HuggingFacePipeline here
-        # E.g., return ChatOllama(model="llama3")
-        raise NotImplementedError("Local LLM integration via Ollama not yet configured. Use 'openai' for V1.")
+        # ----------------------------------------------------------------
+        # Points at ANY OpenAI-compatible server running on a rented GPU.
+        # Spin up Ollama or vLLM on RunPod / Vast.ai / Lambda Labs,
+        # then set these two env vars in your .env:
+        #
+        #   LOCAL_LLM_BASE_URL=http://<your-gpu-ip>:8000/v1
+        #   LOCAL_LLM_MODEL=llama3.1:70b   (or qwen2.5:72b, etc.)
+        #
+        # vLLM exposes an OpenAI-compatible API, so ChatOpenAI works
+        # with zero changes — just override the base_url.
+        # ----------------------------------------------------------------
+        try:
+            from langchain_openai import ChatOpenAI
+        except ImportError:
+            raise ImportError("Please 'pip install langchain-openai' to use local vLLM.")
+        base_url = os.getenv("LOCAL_LLM_BASE_URL")
+        model_name = os.getenv("LOCAL_LLM_MODEL", "llama3.1")
+        if not base_url:
+            raise ValueError(
+                "LOCAL_LLM_BASE_URL is not set in your .env file.\n"
+                "Set it to your rented GPU's vLLM/Ollama endpoint, e.g.:\n"
+                "  LOCAL_LLM_BASE_URL=http://<gpu-ip>:8000/v1"
+            )
+        print(f"🏠 Initializing Local LLM via vLLM/Ollama at {base_url} (model: {model_name})...")
+        return ChatOpenAI(
+            model=model_name,
+            base_url=base_url,
+            api_key=os.getenv("LOCAL_LLM_API_KEY", "not-needed"),  # vLLM may not need a real key
+            temperature=0,
+        )
         
     else:
         raise ValueError(f"Unknown LLM model: {model_choice}")
+
+@traceable(name="Rewrite Query")
+def rewrite_query(llm: BaseChatModel, question: str) -> str:
+    """
+    Phase 1 — Query Rewriting.
+    Rewrites a raw user question into a concise, retrieval-optimized search
+    query before it hits ChromaDB.  This dramatically improves recall for
+    vague, conversational, or multi-intent questions.
+
+    Example:
+        "what's the fuse thing on the back panel?"
+        → "rear panel fuse rating and location specifications"
+    """
+    system_prompt = (
+        "You are a search-query optimizer for a medical X-ray equipment service manual. "
+        "Rewrite the user's question into a short, precise search query "
+        "that will retrieve the most relevant technical information from a vector database. "
+        "Output ONLY the rewritten query — no explanation, no punctuation at the end."
+    )
+    messages = [
+        SystemMessage(content=system_prompt),
+        HumanMessage(content=question),
+    ]
+    try:
+        response = llm.invoke(messages)
+        rewritten = response.content.strip()
+        print(f"🔍 Query rewritten: '{question}' → '{rewritten}'")
+        return rewritten
+    except Exception as e:
+        # Graceful fallback — use original question if rewriting fails
+        print(f"⚠️ Query rewriting failed ({e}), using original question.")
+        return question
+
 
 @traceable(name="Generate RAG Answer")
 def generate_answer(llm, question: str, context: str) -> str:
