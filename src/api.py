@@ -1,5 +1,5 @@
 import os
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI
 from contextlib import asynccontextmanager
 from src.embedding import get_embedding_model, get_vector_store
 from src.llm import get_llm, generate_answer, rewrite_query
@@ -133,4 +133,4 @@ def agent_query_rag(request: AgentQueryRequest):
         sources=result["sources"],
         steps_taken=result["steps_taken"],
         grade=result["grade"],
-    )
+    )

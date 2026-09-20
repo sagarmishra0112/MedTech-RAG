@@ -39,13 +39,12 @@ def chunk_text():
     chunk_overlap=200,
     length_function=len,
     is_separator_regex=False,
-)
+    )
 
     chunks = text_splitter1.split_text(text)
     final_chunks = text_splitter2.split_documents(chunks)
 
     print(f"✅ Generated {len(final_chunks)} text chunks.")
-    print(final_chunks[2 ])
     return final_chunks
 
 def chunk_tables():
