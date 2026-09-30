@@ -4,36 +4,49 @@ from contextlib import asynccontextmanager
 from src.embedding import get_embedding_model, get_vector_store
 from src.llm import get_llm, generate_answer, rewrite_query
 from src.agent import run_agent
+from src.judge import build_judge_llm_raw
 from dotenv import load_dotenv
 
 from src.schemas import QueryRequest, QueryResponse, AgentQueryRequest, AgentQueryResponse
 from langsmith import traceable
 
-# Global variable to hold our database in memory
+# Global state: initialized once at server startup, reused across all requests
 vector_store = None
-llm = None
+llm = None          # Generator LLM (gpt-4o-mini) — answers questions
+judge_llm = None    # Judge LLM (Claude)          — grades answers independently
 
 # --- NEW: Lifespan Manager ---
 # This runs exactly once BEFORE the server starts taking requests
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    global vector_store, llm
+    global vector_store, llm, judge_llm
     load_dotenv()
     print("🚀 Loading AI Models & ChromaDB...")
     embedding_choice = os.getenv("EMBEDDING_MODEL", "huggingface")
     embeddings = get_embedding_model(embedding_choice)
     vector_store = get_vector_store("chroma", embeddings)
-    
-    # Try to load the LLM. 
-    # Change "openai" below to "google", "anthropic", or "local" to change providers!
+
+    # Generator LLM — produces answers at runtime
+    # Controlled by GENERATOR_LLM in .env (default: openai)
+    # Options: openai | anthropic | google | groq | local
+    generator_provider = os.getenv("GENERATOR_LLM", "openai")
     try:
-        llm = get_llm("openai")
+        llm = get_llm(generator_provider)
     except Exception as e:
-        print(f"⚠️ Generation Model Offline. (No API key or package missing). Error: {e}")
+        print(f"⚠️ Generator LLM offline (no API key or package missing). Error: {e}")
         llm = None
-        
+
+    # Judge LLM — grades answers independently (cross-provider = unbiased)
+    # Configured via JUDGE_LLM in .env (default: anthropic / Claude 3.5 Haiku)
+    try:
+        judge_llm = build_judge_llm_raw()
+        print("✅ Judge LLM loaded and ready.")
+    except Exception as e:
+        print(f"⚠️ Judge LLM offline — agent will fall back to self-grading. Error: {e}")
+        judge_llm = None
+
     print("✅ System loaded and ready!")
-    yield # Server runs here 
+    yield  # Server runs here
     print("🛑 Shutting down server...")
 
 # 1. Create the 'app' instance, using the lifespan
@@ -103,16 +116,17 @@ def query_rag(request: QueryRequest):
 @traceable(name="MedTech Agentic RAG Endpoint")
 def agent_query_rag(request: AgentQueryRequest):
     """
-    Agentic RAG endpoint.
+    Agentic RAG endpoint with runtime self-correction.
     Unlike /query (single retrieve→generate), this endpoint runs a
     ReAct agent loop that:
       1. Decides which tool to call (text search / table search / summary)
       2. Inspects the results, calls more tools if needed
       3. Synthesizes a grounded final answer
-      4. Self-grades the answer and retries if the score is too low
+      4. Has the JUDGE LLM (Claude) grade the answer independently
+      5. Retries with a smarter query strategy if score < 3
 
-    Response includes `steps_taken` (tool calls made) and
-    `grade` (self-critique score 1–5).
+    Response includes `steps_taken`, `grade`, `correction_attempts`,
+    `judge_provider`, and `confidence` (high/medium/low).
     """
     if not llm:
         return AgentQueryResponse(
@@ -120,6 +134,9 @@ def agent_query_rag(request: AgentQueryRequest):
             sources=[],
             steps_taken=0,
             grade=0,
+            correction_attempts=0,
+            judge_provider="none",
+            confidence="low",
         )
 
     print(f"\n🤖 Agentic query received: {request.question}")
@@ -127,10 +144,14 @@ def agent_query_rag(request: AgentQueryRequest):
         question=request.question,
         vector_store=vector_store,
         llm=llm,
+        judge_llm=judge_llm,   # None if Claude key missing — agent degrades to self-grading
     )
     return AgentQueryResponse(
         answer=result["answer"],
         sources=result["sources"],
         steps_taken=result["steps_taken"],
         grade=result["grade"],
+        correction_attempts=result["correction_attempts"],
+        judge_provider=result["judge_provider"],
+        confidence=result["confidence"],
     )

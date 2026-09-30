@@ -28,6 +28,7 @@ from langchain_core.messages import HumanMessage, SystemMessage, AIMessage
 from langchain_core.tools import tool
 from langsmith import traceable
 from langgraph.prebuilt import create_react_agent
+from src.llm import rewrite_query
 
 
 # ─────────────────────────────────────────────
@@ -139,44 +140,61 @@ def build_tools(vector_store):
 # 2. Phase 3: Self-Critique Grader
 # ─────────────────────────────────────────────
 
-def grade_answer(llm, question: str, answer: str, context_snippets: list[str]) -> int:
+def grade_answer(
+    generator_llm,
+    question: str,
+    answer: str,
+    context_snippets: list[str],
+    judge_llm=None,
+) -> int:
     """
-    Asks the LLM to score its own answer on a 1–5 scale.
+    Grades the generated answer on a 1–5 scale.
+
+    Uses judge_llm (cross-provider) if provided; falls back to generator_llm
+    with a self-grading warning if judge_llm is None.
 
     Scoring rubric:
-      1 — Answer is wrong, hallucinated, or completely off-topic.
-      2 — Answer is partial; key information is missing.
-      3 — Answer is acceptable but could be improved.
-      4 — Answer is good; addresses the question with evidence.
-      5 — Answer is complete, precise, fully grounded in context.
+      1 — Wrong, hallucinated, or completely off-topic.
+      2 — Partial; key information is missing.
+      3 — Acceptable but could be improved.
+      4 — Good; addresses the question with evidence from context.
+      5 — Complete, precise, fully grounded in retrieved context.
 
     Returns:
-        int score 1–5. Falls back to 3 (pass) on any parsing error.
+        int score 1–5. Falls back to 3 (neutral pass) on any parse error.
     """
+    if judge_llm is None:
+        print("⚠️  No judge_llm provided — falling back to self-grading (same model as generator).")
+        grader = generator_llm
+    else:
+        grader = judge_llm
+
     context_block = "\n\n".join(context_snippets[:4])  # cap to avoid huge prompt
 
     grade_prompt = (
-        "You are a strict quality-control evaluator for a RAG system.\n\n"
+        "You are a strict, impartial quality-control evaluator for a RAG system "
+        "that answers questions about a medical X-ray equipment service manual.\n\n"
         f"QUESTION: {question}\n\n"
-        f"RETRIEVED CONTEXT (excerpts):\n{context_block}\n\n"
-        f"ANSWER GENERATED:\n{answer}\n\n"
+        f"RETRIEVED CONTEXT (what the system had access to):\n{context_block}\n\n"
+        f"GENERATED ANSWER:\n{answer}\n\n"
         "Score the answer on a scale of 1–5 using this rubric:\n"
-        "  1 = Wrong or hallucinated\n"
-        "  2 = Partially correct, key info missing\n"
-        "  3 = Acceptable\n"
-        "  4 = Good, well-grounded\n"
-        "  5 = Excellent, precise, fully evidenced\n\n"
+        "  1 = Wrong or hallucinated — contradicts context or invents facts\n"
+        "  2 = Partially correct — key information missing or imprecise\n"
+        "  3 = Acceptable — answers the question but could be more specific\n"
+        "  4 = Good — well-grounded in context, addresses all parts\n"
+        "  5 = Excellent — precise, complete, fully evidenced by context\n\n"
         "Output ONLY a single integer (1, 2, 3, 4, or 5). No explanation."
     )
     try:
-        response = llm.invoke([HumanMessage(content=grade_prompt)])
+        response = grader.invoke([HumanMessage(content=grade_prompt)])
         score_str = response.content.strip()
-        score = int(score_str[0])  # take first char in case of extra text
+        score = int(score_str[0])  # take first char in case of trailing text
         score = max(1, min(5, score))  # clamp to valid range
-        print(f"📊 Answer graded: {score}/5")
+        grader_label = "judge" if judge_llm else "self"
+        print(f"[Grade] Answer graded by {grader_label}: {score}/5")
         return score
     except Exception as e:
-        print(f"⚠️ Grader failed ({e}), defaulting to score 3 (pass).")
+        print(f"[WARN] Grader failed ({e}), defaulting to score 3 (pass).")
         return 3
 
 
@@ -206,28 +224,39 @@ def run_agent(
     question: str,
     vector_store,
     llm,
+    judge_llm=None,
     max_grade_retries: int = 2,
 ) -> dict[str, Any]:
     """
-    Full agentic RAG pipeline (Phases 2 + 3).
+    Full agentic RAG pipeline with runtime self-correction.
 
     Args:
         question:          The user's original question.
         vector_store:      The already-loaded ChromaDB instance.
-        llm:               The already-loaded LangChain LLM instance.
-        max_grade_retries: How many times to retry if the answer grades poorly.
+        llm:               Generator LLM (gpt-4o-mini) — answers the question.
+        judge_llm:         Judge LLM (Claude) — grades the answer independently.
+                           If None, falls back to self-grading via llm.
+        max_grade_retries: Max retries when judge score is below threshold.
 
     Returns:
         {
-            "answer":      str        — the final synthesized answer,
-            "sources":     list[str]  — human-readable source locations,
-            "steps_taken": int        — number of tool calls the agent made,
-            "grade":       int        — self-critique score (1–5),
+            "answer":              str        — final synthesized answer,
+            "sources":             list[str]  — human-readable source locations,
+            "steps_taken":         int        — total tool calls across all attempts,
+            "grade":               int        — final judge score (1–5),
+            "correction_attempts": int        — number of retries triggered,
+            "judge_provider":      str        — 'anthropic' | 'openai' | 'none',
+            "confidence":          str        — 'high' | 'medium' | 'low',
         }
     """
     tools = build_tools(vector_store)
 
-    # LangGraph create_react_agent — the modern replacement for AgentExecutor
+    # Determine judge provider label for metadata
+    if judge_llm is not None:
+        judge_provider = os.getenv("JUDGE_LLM", "anthropic").lower()
+    else:
+        judge_provider = "openai"  # self-grading fallback
+
     agent = create_react_agent(
         model=llm,
         tools=tools,
@@ -239,62 +268,100 @@ def run_agent(
     steps_taken = 0
     final_answer = ""
     grade = 5
+    correction_attempts = 0
+
+    # Retry escalation strategies:
+    #   Attempt 0: original question, normal retrieval
+    #   Attempt 1: rewritten query (better retrieval), expanded context window
+    #   Attempt 2: explicit instruction for precision + both tool types
+    def _build_query(attempt: int) -> str:
+        if attempt == 0:
+            return question
+        if attempt == 1:
+            rewritten = rewrite_query(llm, question)
+            return rewritten
+        # Final attempt: ask explicitly for technical precision
+        return (
+            f"{question} "
+            "Please search both text sections and data tables. "
+            "Include exact values, specifications, and page references."
+        )
 
     for attempt in range(max_grade_retries + 1):
-        query = question if attempt == 0 else f"{question} (provide more specific and detailed information)"
+        query = _build_query(attempt)
+        # Expand retrieval window on retries to cast a wider net
+        top_k = 4 + (attempt * 2)   # 4 → 6 → 8
+
         print(f"\n{'='*60}")
-        print(f"🤖 Agent attempt {attempt + 1}/{max_grade_retries + 1}")
-        print(f"   Question: {query}")
+        print(f"[Agent] Attempt {attempt + 1}/{max_grade_retries + 1}  (top_k={top_k})")
+        print(f"   Query: {query}")
         print(f"{'='*60}")
 
-        # LangGraph agent returns a dict with a "messages" list
         result = agent.invoke({"messages": [HumanMessage(content=query)]})
-
         messages = result.get("messages", [])
 
-        # Extract final answer — it's the last AIMessage content
+        # Extract final answer — last AIMessage with non-empty content
         final_answer = ""
         for msg in reversed(messages):
             if isinstance(msg, AIMessage) and msg.content:
                 final_answer = msg.content
                 break
 
-        # Extract tool call observations and sources from message history
+        # Extract tool observations and source metadata
         collected_sources = []
         context_snippets = []
-        steps_taken = 0
+        attempt_steps = 0
 
         for msg in messages:
-            # ToolMessage holds the tool's return value
             if hasattr(msg, "content") and hasattr(msg, "name"):
                 observation = str(msg.content)
                 context_snippets.append(observation)
-                steps_taken += 1
-                # Parse [Source Location] headers embedded in tool output
+                attempt_steps += 1
                 matches = re.findall(r"\[([^\]]+)\]", observation)
                 for match in matches:
                     if any(kw in match for kw in ["Page", "Table", "General", "Text"]):
                         if match not in collected_sources:
                             collected_sources.append(match)
 
+        steps_taken += attempt_steps
+
         if not collected_sources:
             collected_sources = ["Retrieved from service manual"]
 
-        print(f"   Tool calls made: {steps_taken}")
+        print(f"   Tool calls this attempt: {attempt_steps}")
         print(f"   Sources: {collected_sources}")
 
-        # ── Phase 3: Grade the answer ──
-        grade = grade_answer(llm, question, final_answer, context_snippets)
+        # ── Runtime self-correction: grade with independent judge ──
+        grade = grade_answer(
+            generator_llm=llm,
+            question=question,
+            answer=final_answer,
+            context_snippets=context_snippets,
+            judge_llm=judge_llm,
+        )
 
         if grade >= 3:
-            print(f"✅ Answer passed grading (score {grade}/5). Done.")
+            print(f"   [PASS] Answer passed judge (score {grade}/5).")
             break
         else:
-            print(f"🔄 Answer scored {grade}/5 — retrying with refined query...")
+            correction_attempts += 1
+            print(f"[Retry] Score {grade}/5 below threshold - retrying (attempt {correction_attempts})...")
+
+    # Derive human-readable confidence band from final grade
+    if grade >= 4:
+        confidence = "high"
+    elif grade == 3:
+        confidence = "medium"
+    else:
+        confidence = "low"
 
     return {
         "answer": final_answer,
         "sources": collected_sources,
+        "context_snippets": context_snippets,
         "steps_taken": steps_taken,
         "grade": grade,
+        "correction_attempts": correction_attempts,
+        "judge_provider": judge_provider,
+        "confidence": confidence,
     }

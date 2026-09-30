@@ -15,7 +15,7 @@ def get_llm(model_choice: str):
             from langchain_openai import ChatOpenAI
         except ImportError:
             raise ImportError("Please 'pip install langchain-openai' to use OpenAI.")
-        print("🤖 Initializing OpenAI LLM (gpt-4o-mini)...")
+        print("[LLM] Initializing OpenAI LLM (gpt-4o-mini)...")
         # Requires OPENAI_API_KEY in .env
         return ChatOpenAI(model="gpt-4o-mini", temperature=0)
         
@@ -24,7 +24,7 @@ def get_llm(model_choice: str):
             from langchain_anthropic import ChatAnthropic
         except ImportError:
             raise ImportError("Please 'pip install langchain-anthropic' to use Claude.")
-        print("🟣 Initializing Anthropic LLM (claude-3-haiku)...")
+        print("[LLM] Initializing Anthropic LLM (claude-3-haiku)...")
         # Requires ANTHROPIC_API_KEY in .env
         return ChatAnthropic(model_name="claude-3-haiku-20240307", temperature=0)
         
@@ -33,7 +33,7 @@ def get_llm(model_choice: str):
             from langchain_google_genai import ChatGoogleGenerativeAI
         except ImportError:
             raise ImportError("Please 'pip install langchain-google-genai' to use Gemini.")
-        print("🔵 Initializing Google LLM (gemini-1.5-flash)...")
+        print("[LLM] Initializing Google LLM (gemini-1.5-flash)...")
         # Requires GOOGLE_API_KEY in .env
         return ChatGoogleGenerativeAI(model="gemini-1.5-flash", temperature=0)
         
@@ -61,7 +61,7 @@ def get_llm(model_choice: str):
                 "Set it to your rented GPU's vLLM/Ollama endpoint, e.g.:\n"
                 "  LOCAL_LLM_BASE_URL=http://<gpu-ip>:8000/v1"
             )
-        print(f"🏠 Initializing Local LLM via vLLM/Ollama at {base_url} (model: {model_name})...")
+        print(f"[LLM] Initializing Local LLM via vLLM/Ollama at {base_url} (model: {model_name})...")
         return ChatOpenAI(
             model=model_name,
             base_url=base_url,
@@ -69,6 +69,29 @@ def get_llm(model_choice: str):
             temperature=0,
         )
         
+    elif model_choice == "groq":
+        # ----------------------------------------------------------------
+        # Groq — free tier, OpenAI-compatible API, very fast inference.
+        # Models: llama-3.1-70b-versatile, llama-3.1-8b-instant, gemma2-9b-it
+        # Get a free key at: https://console.groq.com
+        # Add to .env:  GROQ_API_KEY=gsk_...
+        # ----------------------------------------------------------------
+        try:
+            from langchain_openai import ChatOpenAI
+        except ImportError:
+            raise ImportError("Please 'pip install langchain-openai' to use Groq.")
+        groq_key = os.getenv("GROQ_API_KEY")
+        if not groq_key:
+            raise ValueError("GROQ_API_KEY is not set in your .env file.")
+        groq_model = os.getenv("GROQ_MODEL", "llama-3.1-70b-versatile")
+        print(f"[LLM] Initializing Groq LLM ({groq_model}) - free tier...")
+        return ChatOpenAI(
+            model=groq_model,
+            base_url="https://api.groq.com/openai/v1",
+            api_key=groq_key,
+            temperature=0,
+        )
+
     else:
         raise ValueError(f"Unknown LLM model: {model_choice}")
 
@@ -97,7 +120,7 @@ def rewrite_query(llm: BaseChatModel, question: str) -> str:
     try:
         response = llm.invoke(messages)
         rewritten = response.content.strip()
-        print(f"🔍 Query rewritten: '{question}' → '{rewritten}'")
+        print(f"[Query] Rewritten: '{question}' -> '{rewritten}'")
         return rewritten
     except Exception as e:
         # Graceful fallback — use original question if rewriting fails

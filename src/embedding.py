@@ -27,12 +27,12 @@ def get_embedding_model(model_choice):
     if model_choice == "openai":
         if OpenAIEmbeddings is None:
             raise ImportError("Please 'pip install langchain-openai' to use OpenAI embeddings.")
-        print("🤖 Initializing OpenAI Embeddings (text-embedding-3-small)...")
+        print("[Embedding] Initializing OpenAI Embeddings (text-embedding-3-small)...")
         # Ensure OPENAI_API_KEY is in your .env file
         return OpenAIEmbeddings(model="text-embedding-3-small")
         
     elif model_choice == "huggingface":
-        print("🤗 Initializing local HuggingFace Embeddings (all-MiniLM-L6-v2)...")
+        print("[Embedding] Initializing local HuggingFace Embeddings (all-MiniLM-L6-v2)...")
         # This will download the model to your local machine the first time it runs
         return HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
     else:
@@ -41,13 +41,13 @@ def get_embedding_model(model_choice):
 def get_vector_store(store_choice, embeddings_model):
     """Factory function to swap out the underlying vector database."""
     if store_choice == "chroma":
-        print(f"🗄️ Initializing local ChromaDB at {os.path.abspath(DB_DIR)}...")
+        print(f"[VectorStore] Initializing local ChromaDB at {os.path.abspath(DB_DIR)}...")
         return Chroma(
             persist_directory=DB_DIR, 
             embedding_function=embeddings_model
         )
     elif store_choice == "pinecone":
-        print("🌲 Pinecone Vector Store selected. (Placeholder for V2)")
+        print("[VectorStore] Pinecone selected. (Placeholder)")
         # To strictly switch to Pinecone, you would import PineconeVectorStore
         # and initialize it with your PINECONE_API_KEY here.
         raise NotImplementedError("Pinecone not yet fully configured. Use 'chroma' for V1.")
@@ -65,12 +65,12 @@ def _generate_doc_id(content: str, source: str, index: int) -> str:
     return hashlib.sha256(hash_input.encode("utf-8")).hexdigest()[:16]
 
 def main(args):
-    print("🚀 Starting Embedding & Vector Storage Pipeline...")
+    print("Starting Embedding & Vector Storage Pipeline...")
     load_dotenv() # Load API keys from .env if needed
     
     # --- V2 FIX: Reset ChromaDB if --reset flag is passed ---
     if args.reset and os.path.exists(DB_DIR):
-        print("🗑️  --reset flag detected. Wiping existing ChromaDB...")
+        print("  --reset flag: wiping existing ChromaDB...")
         shutil.rmtree(DB_DIR)
         print("✅ Old database deleted.")
     
@@ -120,7 +120,7 @@ def main(args):
         
     vector_store.add_documents(documents, ids=doc_ids)
     print("✅ All documents successfully embedded and stored!")
-    print(f"🎯 Ready for Contextual Retrieval.")
+    print(f"[OK] Ready for Contextual Retrieval.")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Embed chunks into a Vector DB.")

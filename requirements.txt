@@ -14,7 +14,7 @@ langchain-core>=1.2.0
 langchain>=0.3.0                      # Required for tool definitions
 langgraph>=0.2.0                      # Required for create_react_agent (modern AgentExecutor replacement)
 langchain-openai>=1.1.0               # Default. Add OPENAI_API_KEY to .env to activate.
-# langchain-anthropic>=0.3.0          # Optional. Add ANTHROPIC_API_KEY to .env to activate.
+langchain-anthropic>=0.3.0            # Judge LLM. Add ANTHROPIC_API_KEY to .env to activate.
 # langchain-google-genai>=2.0.0       # Optional. Add GOOGLE_API_KEY to .env to activate.
 
 # Embeddings & Vector Store

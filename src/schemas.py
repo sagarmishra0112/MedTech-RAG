@@ -23,5 +23,17 @@ class AgentQueryResponse(BaseModel):
         description="Number of tool calls the agent made before producing this answer."
     )
     grade: int = Field(
-        description="Self-critique score 1–5. 1=hallucinated, 5=excellent."
+        description="Judge score 1–5. 1=hallucinated, 5=excellent."
+    )
+    correction_attempts: int = Field(
+        default=0,
+        description="Number of retries the agent made due to a low judge score."
+    )
+    judge_provider: str = Field(
+        default="none",
+        description="Which LLM graded the answer: 'anthropic', 'openai' (self-grading), or 'none'."
+    )
+    confidence: str = Field(
+        default="unknown",
+        description="Human-readable confidence band derived from grade: 'high' (4-5), 'medium' (3), 'low' (1-2)."
     )
