@@ -137,6 +137,7 @@ def agent_query_rag(request: AgentQueryRequest):
             correction_attempts=0,
             judge_provider="none",
             confidence="low",
+            judge_critique="",
         )
 
     print(f"\n🤖 Agentic query received: {request.question}")
@@ -154,4 +155,5 @@ def agent_query_rag(request: AgentQueryRequest):
         correction_attempts=result["correction_attempts"],
         judge_provider=result["judge_provider"],
         confidence=result["confidence"],
+        judge_critique=result["judge_critique"],
     )

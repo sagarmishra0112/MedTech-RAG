@@ -10,12 +10,16 @@ The agent:
      or get_document_summary).
   3. Observes the result, decides if it needs more info.
   4. Writes a final answer grounded only in retrieved context.
-  5. (Phase 3) A grader scores the answer; retries if score < 3.
+  5. (Phase 3) Claude grades the answer via structured JudgeVerdict.
+              If score < 3, the verdict's flaw_type selects the retry
+              strategy and Claude's own diagnosis is injected verbatim
+              into the next GPT prompt.
 
 Entry point for the API:
     result = run_agent(question, vector_store, llm)
     # result = {"answer": str, "sources": list[str],
-    #           "steps_taken": int, "grade": int}
+    #           "steps_taken": int, "grade": int,
+    #           "judge_critique": str}
 """
 
 from __future__ import annotations
@@ -29,6 +33,7 @@ from langchain_core.tools import tool
 from langsmith import traceable
 from langgraph.prebuilt import create_react_agent
 from src.llm import rewrite_query
+from src.schemas import JudgeVerdict, FlawType
 
 
 # ─────────────────────────────────────────────
@@ -137,8 +142,16 @@ def build_tools(vector_store):
 
 
 # ─────────────────────────────────────────────
-# 2. Phase 3: Self-Critique Grader
+# 2. Phase 3: Structured Critique Grader
 # ─────────────────────────────────────────────
+
+# Neutral pass-through verdict used when grading fails or is unavailable.
+_FALLBACK_VERDICT = JudgeVerdict(
+    score=3,
+    flaw_type=FlawType.IMPRECISE,
+    flaw="Grader unavailable; defaulting to neutral pass.",
+    missing="Unknown — grader did not respond.",
+)
 
 def grade_answer(
     generator_llm,
@@ -146,22 +159,21 @@ def grade_answer(
     answer: str,
     context_snippets: list[str],
     judge_llm=None,
-) -> int:
+) -> JudgeVerdict:
     """
-    Grades the generated answer on a 1–5 scale.
+    Grades the generated answer and returns a structured JudgeVerdict.
 
     Uses judge_llm (cross-provider) if provided; falls back to generator_llm
     with a self-grading warning if judge_llm is None.
 
-    Scoring rubric:
-      1 — Wrong, hallucinated, or completely off-topic.
-      2 — Partial; key information is missing.
-      3 — Acceptable but could be improved.
-      4 — Good; addresses the question with evidence from context.
-      5 — Complete, precise, fully grounded in retrieved context.
+    The verdict contains:
+      - score      : 1–5 quality score
+      - flaw_type  : FlawType enum — drives which retry strategy to apply
+      - flaw        : ≤15-word diagnosis of why the answer failed
+      - missing     : ≤15-word description of what information is absent
 
     Returns:
-        int score 1–5. Falls back to 3 (neutral pass) on any parse error.
+        JudgeVerdict. Falls back to _FALLBACK_VERDICT (score=3) on any error.
     """
     if judge_llm is None:
         print("⚠️  No judge_llm provided — falling back to self-grading (same model as generator).")
@@ -177,25 +189,32 @@ def grade_answer(
         f"QUESTION: {question}\n\n"
         f"RETRIEVED CONTEXT (what the system had access to):\n{context_block}\n\n"
         f"GENERATED ANSWER:\n{answer}\n\n"
-        "Score the answer on a scale of 1–5 using this rubric:\n"
-        "  1 = Wrong or hallucinated — contradicts context or invents facts\n"
-        "  2 = Partially correct — key information missing or imprecise\n"
-        "  3 = Acceptable — answers the question but could be more specific\n"
-        "  4 = Good — well-grounded in context, addresses all parts\n"
-        "  5 = Excellent — precise, complete, fully evidenced by context\n\n"
-        "Output ONLY a single integer (1, 2, 3, 4, or 5). No explanation."
+        "Evaluate the answer and return a structured verdict with these fields:\n"
+        "  score      : integer 1–5\n"
+        "    1 = Wrong or hallucinated — contradicts context or invents facts\n"
+        "    2 = Partially correct — key information missing or imprecise\n"
+        "    3 = Acceptable — answers the question but could be more specific\n"
+        "    4 = Good — well-grounded in context, addresses all parts\n"
+        "    5 = Excellent — precise, complete, fully evidenced by context\n"
+        "  flaw_type  : one of [missing_info, hallucination, off_scope, imprecise]\n"
+        "    missing_info  — answer is on-topic but lacks key facts\n"
+        "    hallucination — answer states something not in the retrieved context\n"
+        "    off_scope     — answer addresses things the question did not ask\n"
+        "    imprecise     — answer is vague or approximate where exactness is needed\n"
+        "  flaw        : one short phrase explaining the failure. MAX 15 WORDS.\n"
+        "  missing     : one short phrase naming what information is absent. MAX 15 WORDS.\n\n"
+        "Be concise. Never exceed 15 words in 'flaw' or 'missing'."
     )
     try:
-        response = grader.invoke([HumanMessage(content=grade_prompt)])
-        score_str = response.content.strip()
-        score = int(score_str[0])  # take first char in case of trailing text
-        score = max(1, min(5, score))  # clamp to valid range
+        structured_grader = grader.with_structured_output(JudgeVerdict)
+        verdict: JudgeVerdict = structured_grader.invoke([HumanMessage(content=grade_prompt)])
+        verdict.score = max(1, min(5, verdict.score))  # clamp to valid range
         grader_label = "judge" if judge_llm else "self"
-        print(f"[Grade] Answer graded by {grader_label}: {score}/5")
-        return score
+        print(f"[Grade] {grader_label}: {verdict.score}/5 | {verdict.flaw_type.value} | {verdict.flaw}")
+        return verdict
     except Exception as e:
-        print(f"[WARN] Grader failed ({e}), defaulting to score 3 (pass).")
-        return 3
+        print(f"[WARN] Grader failed ({e}), defaulting to neutral pass verdict.")
+        return _FALLBACK_VERDICT
 
 
 # ─────────────────────────────────────────────
@@ -240,13 +259,15 @@ def run_agent(
 
     Returns:
         {
-            "answer":              str        — final synthesized answer,
-            "sources":             list[str]  — human-readable source locations,
-            "steps_taken":         int        — total tool calls across all attempts,
-            "grade":               int        — final judge score (1–5),
-            "correction_attempts": int        — number of retries triggered,
-            "judge_provider":      str        — 'anthropic' | 'openai' | 'none',
-            "confidence":          str        — 'high' | 'medium' | 'low',
+            "answer":              str  — final synthesized answer,
+            "sources":             list[str] — human-readable source locations,
+            "steps_taken":         int  — total tool calls across all attempts,
+            "grade":               int  — final judge score (1–5),
+            "correction_attempts": int  — number of retries triggered,
+            "judge_provider":      str  — 'anthropic' | 'openai' | 'none',
+            "confidence":          str  — 'high' | 'medium' | 'low',
+            "judge_critique":      str  — formatted string of Claude's last rejection
+                                         diagnosis, empty if answer passed first time.
         }
     """
     tools = build_tools(vector_store)
@@ -269,32 +290,69 @@ def run_agent(
     final_answer = ""
     grade = 5
     correction_attempts = 0
+    last_verdict: JudgeVerdict | None = None  # populated after each grading pass
+    judge_critique = ""                       # surfaced in the API response
 
-    # Retry escalation strategies:
-    #   Attempt 0: original question, normal retrieval
-    #   Attempt 1: rewritten query (better retrieval), expanded context window
-    #   Attempt 2: explicit instruction for precision + both tool types
-    def _build_query(attempt: int) -> str:
-        if attempt == 0:
+    # ── Retry strategy selection ───────────────────────────────────────────
+    # Each flaw_type maps to a different correction strategy so that Claude's
+    # diagnosis directly shapes what GPT does differently on the next attempt.
+    def _build_query(attempt: int, verdict: JudgeVerdict | None) -> str:
+        if attempt == 0 or verdict is None:
             return question
-        if attempt == 1:
-            rewritten = rewrite_query(llm, question)
-            return rewritten
-        # Final attempt: ask explicitly for technical precision
+
+        flaw_type = verdict.flaw_type
+        flaw_text = verdict.flaw
+        missing_text = verdict.missing
+
+        if flaw_type == FlawType.MISSING_INFO:
+            # Rewrite the query to specifically target the missing information
+            rewritten = rewrite_query(llm, f"{question} {missing_text}")
+            return (
+                f"{rewritten}\n\n"
+                f"[JUDGE REJECTION — missing_info]\n"
+                f"Previous answer was rejected. Flaw: {flaw_text}\n"
+                f"You are specifically missing: {missing_text}\n"
+                "Search both search_text_docs and search_table_docs to find this."
+            )
+
+        if flaw_type == FlawType.HALLUCINATION:
+            # Do not invent — ground strictly in retrieved context only
+            return (
+                f"{question}\n\n"
+                f"[JUDGE REJECTION — hallucination]\n"
+                f"Previous answer was rejected. Flaw: {flaw_text}\n"
+                "CRITICAL: Your previous answer contained information NOT in the retrieved context.\n"
+                "You MUST only state facts that appear verbatim in the tool results.\n"
+                "If the information is not found, say so explicitly. Do NOT infer or extrapolate."
+            )
+
+        if flaw_type == FlawType.OFF_SCOPE:
+            # Narrow scope — answer only what was asked
+            return (
+                f"{question}\n\n"
+                f"[JUDGE REJECTION — off_scope]\n"
+                f"Previous answer was rejected. Flaw: {flaw_text}\n"
+                "Answer ONLY the specific question above. Do not include related but unasked information."
+            )
+
+        # FlawType.IMPRECISE — search for exact values
         return (
-            f"{question} "
-            "Please search both text sections and data tables. "
-            "Include exact values, specifications, and page references."
+            f"{question}\n\n"
+            f"[JUDGE REJECTION — imprecise]\n"
+            f"Previous answer was rejected. Flaw: {flaw_text}\n"
+            f"Missing precision on: {missing_text}\n"
+            "Search search_table_docs for exact numeric values, ratings, or specifications.\n"
+            "Include exact values and page references in your answer."
         )
 
     for attempt in range(max_grade_retries + 1):
-        query = _build_query(attempt)
+        query = _build_query(attempt, last_verdict)
         # Expand retrieval window on retries to cast a wider net
         top_k = 4 + (attempt * 2)   # 4 → 6 → 8
 
         print(f"\n{'='*60}")
         print(f"[Agent] Attempt {attempt + 1}/{max_grade_retries + 1}  (top_k={top_k})")
-        print(f"   Query: {query}")
+        print(f"   Query: {query[:120]}{'...' if len(query) > 120 else ''}")
         print(f"{'='*60}")
 
         result = agent.invoke({"messages": [HumanMessage(content=query)]})
@@ -331,21 +389,29 @@ def run_agent(
         print(f"   Tool calls this attempt: {attempt_steps}")
         print(f"   Sources: {collected_sources}")
 
-        # ── Runtime self-correction: grade with independent judge ──
-        grade = grade_answer(
+        # ── Runtime self-correction: grade with structured judge verdict ──
+        last_verdict = grade_answer(
             generator_llm=llm,
             question=question,
             answer=final_answer,
             context_snippets=context_snippets,
             judge_llm=judge_llm,
         )
+        grade = last_verdict.score
 
         if grade >= 3:
             print(f"   [PASS] Answer passed judge (score {grade}/5).")
             break
         else:
             correction_attempts += 1
-            print(f"[Retry] Score {grade}/5 below threshold - retrying (attempt {correction_attempts})...")
+            # Record Claude's diagnosis for the API response
+            judge_critique = (
+                f"[{last_verdict.flaw_type.value}] "
+                f"flaw: {last_verdict.flaw} | "
+                f"missing: {last_verdict.missing}"
+            )
+            print(f"[Retry] Score {grade}/5 — {judge_critique}")
+            print(f"        Retrying (attempt {correction_attempts})...")
 
     # Derive human-readable confidence band from final grade
     if grade >= 4:
@@ -364,4 +430,5 @@ def run_agent(
         "correction_attempts": correction_attempts,
         "judge_provider": judge_provider,
         "confidence": confidence,
+        "judge_critique": judge_critique,
     }
