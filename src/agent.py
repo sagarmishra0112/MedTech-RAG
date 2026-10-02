@@ -400,11 +400,17 @@ def run_agent(
         grade = last_verdict.score
 
         if grade >= 3:
+            if judge_critique:
+                # Print the intermediate critique to terminal so it's visible in server logs,
+                # then clear it — the answer ultimately passed so the UI should not show it.
+                print(f"   [RESOLVED] Previous rejection was corrected: {judge_critique}")
+                judge_critique = ""
             print(f"   [PASS] Answer passed judge (score {grade}/5).")
             break
         else:
             correction_attempts += 1
-            # Record Claude's diagnosis for the API response
+            # Record Claude's diagnosis — printed to terminal, returned in API response
+            # only if the answer never reaches a passing score.
             judge_critique = (
                 f"[{last_verdict.flaw_type.value}] "
                 f"flaw: {last_verdict.flaw} | "

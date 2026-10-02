@@ -6,46 +6,27 @@ st.set_page_config(page_title="MedTech RAG", page_icon="🏥", layout="centered"
 
 st.title("🏥 MedTech RAG: X-Ray Assistant")
 st.markdown(
-    "Ask technical questions about X-ray documentation. "
+    "Ask technical questions about the Allengers 100 X-ray service manual. "
     "The AI retrieves exact diagnostic chunks and tables."
 )
 
 # ── Sidebar ──────────────────────────────────────────────────────────────────
-st.sidebar.header("⚙️ Pipeline Mode")
+st.sidebar.header("⚙️ Settings")
 pipeline_mode = st.sidebar.radio(
-    "Select RAG Pipeline:",
-    ["🤖 Agentic RAG (/agent-query)", "⚡ Classic RAG (/query)"],
+    "Pipeline:",
+    ["🤖 Agentic RAG", "⚡ Classic RAG"],
     help=(
-        "Agentic RAG uses multi-step tool calls, a cross-provider Claude judge, "
-        "and flaw-type–driven retry. Classic RAG is a single pass."
+        "**Agentic**: Multi-step tool calls + Claude judge + flaw-driven retry.\n\n"
+        "**Classic**: Single retrieve → generate pass."
     ),
 )
 is_agentic = "Agentic" in pipeline_mode
 
-# ── Low-score replay panel (only visible in Agentic mode) ───────────────────
-LOW_SCORE_QUERIES = [
-    "What is the output power of the Allengers 100 X-Ray generator?",
-    "What is the kVp range of the machine?",
-    "What is the timer range of the Allengers 100?",
-    "What mAs value is required when running at 100 mA and 80 kVp?",
-    "For a 100 mA, 60 kVp exposure, what mAs should be used?",
-    "What is the most important parameter to monitor during preventive maintenance?",
-]
-
-if is_agentic:
-    st.sidebar.markdown("---")
-    st.sidebar.subheader("🔁 Replay Low-Score Queries")
-    st.sidebar.caption(
-        "These questions scored 0 in the last RAGAS eval. "
-        "Click one to inject it into the chat and see Claude's verdict."
-    )
-    for q in LOW_SCORE_QUERIES:
-        if st.sidebar.button(q[:55] + ("…" if len(q) > 55 else ""), key=f"replay_{q[:20]}"):
-            st.session_state["injected_query"] = q
-
 # ── Chat state ───────────────────────────────────────────────────────────────
 if "messages" not in st.session_state:
     st.session_state.messages = []
+if "_processing" not in st.session_state:
+    st.session_state["_processing"] = False
 
 # Replay previously displayed messages
 for message in st.session_state.messages:
@@ -54,6 +35,11 @@ for message in st.session_state.messages:
 
 # ── Helper: call API and render response ─────────────────────────────────────
 def ask(prompt: str):
+    # Guard: prevent duplicate calls triggered by Streamlit re-renders
+    if st.session_state["_processing"]:
+        return
+    st.session_state["_processing"] = True
+
     with st.chat_message("user"):
         st.markdown(prompt)
     st.session_state.messages.append({"role": "user", "content": prompt})
@@ -84,7 +70,7 @@ def ask(prompt: str):
                     sources = data.get("sources", [])
 
                     full_response = f"{answer}\n\n"
-                    full_response += f"**Sources retrieved:** {', '.join(sources)}"
+                    full_response += f"**Sources:** {', '.join(sources)}"
 
                     if is_agentic:
                         steps    = data.get("steps_taken", 0)
@@ -94,19 +80,20 @@ def ask(prompt: str):
                         conf     = data.get("confidence", "unknown")
                         critique = data.get("judge_critique", "")
 
-                        # ── Core agentic metadata line ──
+                        # Confidence emoji
+                        conf_icon = {"high": "🟢", "medium": "🟡", "low": "🔴"}.get(conf, "⚪")
+                        retry_note = f" · `{attempts}` retr{'y' if attempts == 1 else 'ies'}" if attempts > 0 else ""
+
                         full_response += (
                             f"\n\n---\n"
-                            f"*🤖 Agent · `{steps}` tool calls · "
-                            f"Judge score: `{grade}/5` (`{conf}`) · "
-                            f"Retries: `{attempts}` · "
-                            f"Judge: `{provider}`*"
+                            f"*{conf_icon} Judge: `{grade}/5` ({conf}) · "
+                            f"`{steps}` tool calls{retry_note} · graded by `{provider}`*"
                         )
 
-                        # ── Judge critique block — only shown when a retry occurred ──
+                        # ── Only shown when the answer STILL failed after all retries ──
                         if critique:
                             full_response += (
-                                f"\n\n> **🔍 Claude's rejection diagnosis:**\n"
+                                f"\n\n> ⚠️ **Answer could not be corrected. Claude's diagnosis:**\n"
                                 f"> `{critique}`"
                             )
 
@@ -121,16 +108,14 @@ def ask(prompt: str):
                     )
             except requests.exceptions.ConnectionError:
                 st.error(
-                    "🚨 Connection Error: Could not reach the backend. "
+                    "🚨 Connection Error: Could not reach the backend API. "
                     "Make sure FastAPI is running on port 8000."
                 )
 
-# ── Handle sidebar replay injection ─────────────────────────────────────────
-if "injected_query" in st.session_state:
-    injected = st.session_state.pop("injected_query")
-    ask(injected)
+    st.session_state["_processing"] = False
 
-# ── Normal chat input ────────────────────────────────────────────────────────
-if prompt := st.chat_input("Ask a question about Calibration, Overload Settings, etc…"):
+# ── Chat input ────────────────────────────────────────────────────────────────
+if prompt := st.chat_input("Ask about calibration, fuses, overload settings…"):
     ask(prompt)
+
 
