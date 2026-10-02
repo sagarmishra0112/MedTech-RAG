@@ -44,6 +44,10 @@ class JudgeVerdict(BaseModel):
 
 class AgentQueryRequest(BaseModel):
     question: str = Field(..., example="What is the filament fuse rating and where is it located?")
+    grader_enabled: bool = Field(
+        default=True,
+        description="If false, the judge LLM is bypassed and the agent skips grading/retry.",
+    )
 
 class AgentQueryResponse(BaseModel):
     answer: str
